@@ -1,0 +1,664 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "\ud83d\udc2e + \ud83d\udc0b = \ud83d\udc95\n\n\nHelp mailcow\n\n\nLet us know about your ideas in #mailcow @ Freenode.\n\n\nServercow\n - hosted mailcow, KVM based virtual servers, web-hosting and more.\n\n\n\n\n\n\nGet support\n\n\nCommercial support\n\n\nFor commercial support contact \n.\n\n\nCommunity support\n\n\n\n\nIRC @ \nFreenode, #mailcow\n\n\nGitHub @ \nmailcow/mailcow-dockerized\n\n\n\n\nScreenshots\n\n\nYou can find screenshots \non Imgur\n.\n\n\nOverview\n\n\nThe integrated \nmailcow UI\n allows administrative work on your mail server instance as well as separated domain administrator and mailbox user access:\n\n\n\n\nDKIM key management\n\n\nARC support\n\n\nBlack- and whitelists per domain and per user\n\n\nSpam score management per-user (reject spam, mark spam, greylist)\n\n\nAllow mailbox users to create temporary spam aliases\n\n\nPrepend mail tags to subject or move mail to sub folder (per-user)\n\n\nAllow mailbox users to toggle incoming and outgoing TLS enforcement\n\n\nAllow users to reset SOGo ActiveSync device caches\n\n\nimapsync to migrate or pull remote mailboxes regularly\n\n\nTFA: Yubi OTP and U2F USB (Google Chrome and derivatives only), TOTP\n\n\nAdd domains, mailboxes, aliases, domain aliases and SOGo resources\n\n\nAdd whitelisted hosts to forward mail to mailcow\n\n\nFail2ban-like integration\n\n\n\n\nmailcow dockerized comes with multiple containers linked in one bridged network.\nEach container represents a single application.\n\n\n\n\nDovecot\n\n\nClamAV\n\n\nMemcached\n\n\nRedis\n\n\nMySQL\n\n\nUnbound (as resolver)\n\n\nPHP-FPM\n\n\nPostfix\n\n\nACME-Client (thanks to @bebehei)\n\n\nNginx\n\n\nRmilter\n\n\nRspamd\n\n\nSOGo\n\n\nFail2ban-like integration by @mkuron\n\n\n\n\n6 volumes\n to keep dynamic data - take care of them!\n\n\n\n\nvmail-vol-1\n\n\nredis-vol-1\n\n\nmysql-vol-1\n\n\nrspamd-vol-1\n\n\npostfix-vol-1\n\n\ncrypt-vol-1", 
+            "title": "Information & Support"
+        }, 
+        {
+            "location": "/#_1", 
+            "text": "", 
+            "title": "\ud83d\udc2e + \ud83d\udc0b = \ud83d\udc95"
+        }, 
+        {
+            "location": "/#help-mailcow", 
+            "text": "Let us know about your ideas in #mailcow @ Freenode.  Servercow  - hosted mailcow, KVM based virtual servers, web-hosting and more.", 
+            "title": "Help mailcow"
+        }, 
+        {
+            "location": "/#get-support", 
+            "text": "", 
+            "title": "Get support"
+        }, 
+        {
+            "location": "/#commercial-support", 
+            "text": "For commercial support contact  .", 
+            "title": "Commercial support"
+        }, 
+        {
+            "location": "/#community-support", 
+            "text": "IRC @  Freenode, #mailcow  GitHub @  mailcow/mailcow-dockerized", 
+            "title": "Community support"
+        }, 
+        {
+            "location": "/#screenshots", 
+            "text": "You can find screenshots  on Imgur .", 
+            "title": "Screenshots"
+        }, 
+        {
+            "location": "/#overview", 
+            "text": "The integrated  mailcow UI  allows administrative work on your mail server instance as well as separated domain administrator and mailbox user access:   DKIM key management  ARC support  Black- and whitelists per domain and per user  Spam score management per-user (reject spam, mark spam, greylist)  Allow mailbox users to create temporary spam aliases  Prepend mail tags to subject or move mail to sub folder (per-user)  Allow mailbox users to toggle incoming and outgoing TLS enforcement  Allow users to reset SOGo ActiveSync device caches  imapsync to migrate or pull remote mailboxes regularly  TFA: Yubi OTP and U2F USB (Google Chrome and derivatives only), TOTP  Add domains, mailboxes, aliases, domain aliases and SOGo resources  Add whitelisted hosts to forward mail to mailcow  Fail2ban-like integration   mailcow dockerized comes with multiple containers linked in one bridged network.\nEach container represents a single application.   Dovecot  ClamAV  Memcached  Redis  MySQL  Unbound (as resolver)  PHP-FPM  Postfix  ACME-Client (thanks to @bebehei)  Nginx  Rmilter  Rspamd  SOGo  Fail2ban-like integration by @mkuron   6 volumes  to keep dynamic data - take care of them!   vmail-vol-1  redis-vol-1  mysql-vol-1  rspamd-vol-1  postfix-vol-1  crypt-vol-1", 
+            "title": "Overview"
+        }, 
+        {
+            "location": "/prerequesite-system/", 
+            "text": "Before you run \nmailcow: dockerized\n, there are a few requirements that you should check:\n\n\n\n\nWarning\n\n\nWhen running mailcow: dockerized on a Debian 8 (Jessie) box, you should \nswitch to kernel 4.9 from Jessie backports\n to avoid a bug when running Docker containers with \nhealthchecks\n! For more details read: \ngithub.com/docker/docker/issues/30402\n\n\n\n\n\n\nInfo\n\n\n\n\nmailcow: dockerized requires \nsome ports\n to be open for incomming connections, so make sure that your firewall is not bloking these. Also make sure that no other application is interferring with mailcow's configuration.\n\n\nA correct DNS setup is crucial to every good mailserver setup, so please make sure you got at least the \nbasics\n covered bevore you begin!\n\n\nMake sure that your system has a correct date and \ntime setup\n. This is crucial for stuff like two factor TOTP authentication.\n\n\n\n\n\n\nMinimum System Resources\n\n\nPlease make sure that your system has at least the following resources:\n\n\n\n\n\n\n\n\nResource\n\n\nmailcow: dockerized\n\n\n\n\n\n\n\n\n\n\nCPU\n\n\n1 GHz\n\n\n\n\n\n\nRAM\n\n\n1 GiB (or better 1,5 GiB + Swap)\n\n\n\n\n\n\nDisk\n\n\n5 GiB (without emails)\n\n\n\n\n\n\nSystem Type\n\n\nx86_64\n\n\n\n\n\n\n\n\nClamAV is a greedy RAM muncher. You can disable it in \nmailcow.conf\n by settings SKIP_CLAMD=y.\n\n\nFirewall \n Ports\n\n\nPlease check if any of mailcow's standard ports are open and not in use by other applications:\n\n\n# netstat -tulpn | grep -E -w \n25|80|110|143|443|465|587|993|995\n\n\n\n\n\nIf this command returns any results please remove or stop the application running on that port. You may also adjust mailcows ports via the \nmailcow.conf\n configuration file.\n\n\nDefault Ports\n\n\nIf you have a firewall already up and running please make sure that these ports are open for incoming connections:\n\n\n\n\n\n\n\n\nService\n\n\nProtocol\n\n\nPort\n\n\nContainer\n\n\nVariable\n\n\n\n\n\n\n\n\n\n\nPostfix SMTP\n\n\nTCP\n\n\n25\n\n\npostfix-mailcow\n\n\n${SMTP_PORT}\n\n\n\n\n\n\nPostfix SMTPS\n\n\nTCP\n\n\n465\n\n\npostfix-mailcow\n\n\n${SMTPS_PORT}\n\n\n\n\n\n\nPostfix Submission\n\n\nTCP\n\n\n587\n\n\npostfix-mailcow\n\n\n${SUBMISSION_PORT}\n\n\n\n\n\n\nDovecot IMAP\n\n\nTCP\n\n\n143\n\n\ndovecot-mailcow\n\n\n${IMAP_PORT}\n\n\n\n\n\n\nDovecot IMAPS\n\n\nTCP\n\n\n993\n\n\ndovecot-mailcow\n\n\n${IMAPS_PORT}\n\n\n\n\n\n\nDovecot POP3\n\n\nTCP\n\n\n110\n\n\ndovecot-mailcow\n\n\n${POP_PORT}\n\n\n\n\n\n\nDovecot POP3S\n\n\nTCP\n\n\n995\n\n\ndovecot-mailcow\n\n\n${POPS_PORT}\n\n\n\n\n\n\nDovecot ManageSieve\n\n\nTCP\n\n\n4190\n\n\ndovecot-mailcow\n\n\n${SIEVE_PORT}\n\n\n\n\n\n\nHTTP(S)\n\n\nTCP\n\n\n80/443\n\n\nnginx-mailcow\n\n\n${HTTP_PORT}\n / \n${HTTPS_PORT}\n\n\n\n\n\n\n\n\nTo bind a service to an IP address, you can prepend the IP like this: \nSMTP_PORT=1.2.3.4:25\n\n\nImportant\n: You cannot use IP:PORT bindings in HTTP_PORT and HTTPS_PORT. Please use \nHTTP_PORT=1234\n and \nHTTP_BIND=1.2.3.4\n instead.\n\n\nDate and Time\n\n\nTo ensure that you have the correct date and time setup on your system, please check the output of \ntimedatectl status\n:\n\n\n$ timedatectl status\n      Local time: Sat \n2017\n-05-06 \n02\n:12:33 CEST\n  Universal time: Sat \n2017\n-05-06 \n00\n:12:33 UTC\n        RTC time: Sat \n2017\n-05-06 \n00\n:12:32\n       Time zone: Europe/Berlin \n(\nCEST, +0200\n)\n\n     NTP enabled: yes\nNTP synchronized: yes\n RTC in \nlocal\n TZ: no\n      DST active: yes\n Last DST change: DST began at\n                  Sun \n2017\n-03-26 \n01\n:59:59 CET\n                  Sun \n2017\n-03-26 \n03\n:00:00 CEST\n Next DST change: DST ends \n(\nthe clock jumps one hour backwards\n)\n at\n                  Sun \n2017\n-10-29 \n02\n:59:59 CEST\n                  Sun \n2017\n-10-29 \n02\n:00:00 CET\n\n\n\n\nThe lines \nNTP enabled: yes\n and \nNTP synchronized: yes\n indicate wether you have NTP enabled and if it's synchronized.\n\n\nTo enable NTP you need to run the command \ntimedatectl set-ntp true\n. You also need to edit your \n/etc/systemd/timesyncd.conf\n:\n\n\n# vim /etc/systemd/timesyncd.conf\n[Time]\nServers=0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org", 
+            "title": "Prepare Your System"
+        }, 
+        {
+            "location": "/prerequesite-system/#minimum-system-resources", 
+            "text": "Please make sure that your system has at least the following resources:     Resource  mailcow: dockerized      CPU  1 GHz    RAM  1 GiB (or better 1,5 GiB + Swap)    Disk  5 GiB (without emails)    System Type  x86_64     ClamAV is a greedy RAM muncher. You can disable it in  mailcow.conf  by settings SKIP_CLAMD=y.", 
+            "title": "Minimum System Resources"
+        }, 
+        {
+            "location": "/prerequesite-system/#firewall-ports", 
+            "text": "Please check if any of mailcow's standard ports are open and not in use by other applications:  # netstat -tulpn | grep -E -w  25|80|110|143|443|465|587|993|995   If this command returns any results please remove or stop the application running on that port. You may also adjust mailcows ports via the  mailcow.conf  configuration file.", 
+            "title": "Firewall &amp; Ports"
+        }, 
+        {
+            "location": "/prerequesite-system/#default-ports", 
+            "text": "If you have a firewall already up and running please make sure that these ports are open for incoming connections:     Service  Protocol  Port  Container  Variable      Postfix SMTP  TCP  25  postfix-mailcow  ${SMTP_PORT}    Postfix SMTPS  TCP  465  postfix-mailcow  ${SMTPS_PORT}    Postfix Submission  TCP  587  postfix-mailcow  ${SUBMISSION_PORT}    Dovecot IMAP  TCP  143  dovecot-mailcow  ${IMAP_PORT}    Dovecot IMAPS  TCP  993  dovecot-mailcow  ${IMAPS_PORT}    Dovecot POP3  TCP  110  dovecot-mailcow  ${POP_PORT}    Dovecot POP3S  TCP  995  dovecot-mailcow  ${POPS_PORT}    Dovecot ManageSieve  TCP  4190  dovecot-mailcow  ${SIEVE_PORT}    HTTP(S)  TCP  80/443  nginx-mailcow  ${HTTP_PORT}  /  ${HTTPS_PORT}     To bind a service to an IP address, you can prepend the IP like this:  SMTP_PORT=1.2.3.4:25  Important : You cannot use IP:PORT bindings in HTTP_PORT and HTTPS_PORT. Please use  HTTP_PORT=1234  and  HTTP_BIND=1.2.3.4  instead.", 
+            "title": "Default Ports"
+        }, 
+        {
+            "location": "/prerequesite-system/#date-and-time", 
+            "text": "To ensure that you have the correct date and time setup on your system, please check the output of  timedatectl status :  $ timedatectl status\n      Local time: Sat  2017 -05-06  02 :12:33 CEST\n  Universal time: Sat  2017 -05-06  00 :12:33 UTC\n        RTC time: Sat  2017 -05-06  00 :12:32\n       Time zone: Europe/Berlin  ( CEST, +0200 ) \n     NTP enabled: yes\nNTP synchronized: yes\n RTC in  local  TZ: no\n      DST active: yes\n Last DST change: DST began at\n                  Sun  2017 -03-26  01 :59:59 CET\n                  Sun  2017 -03-26  03 :00:00 CEST\n Next DST change: DST ends  ( the clock jumps one hour backwards )  at\n                  Sun  2017 -10-29  02 :59:59 CEST\n                  Sun  2017 -10-29  02 :00:00 CET  The lines  NTP enabled: yes  and  NTP synchronized: yes  indicate wether you have NTP enabled and if it's synchronized.  To enable NTP you need to run the command  timedatectl set-ntp true . You also need to edit your  /etc/systemd/timesyncd.conf :  # vim /etc/systemd/timesyncd.conf\n[Time]\nServers=0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org", 
+            "title": "Date and Time"
+        }, 
+        {
+            "location": "/prerequesite-dns/", 
+            "text": "Below you can find a list of \nrecommended DNS records\n. While some are mandatory for a mail server (A, MX), others are recommended to build a good reputation score (TXT/SPF) or used for auto-configuration of mail clients (SRV).\n\n\nReferences\n\n\n\n\nA good article covering all relevant topics:\n  \n\"3 DNS Records Every Email Marketer Must Know\"\n\n\nAnother great one, but Zimbra as an example platform:\n  \n\"Best Practices on Email Protection: SPF, DKIM and DMARC\"\n\n\nAn in-depth discussion of SPF, DKIM and DMARC:\n  \n\"How to eliminate spam and protect your name with DMARC\"\n\n\n\n\nReverse DNS of your IP\n\n\nMake sure that the PTR record of your IP matches the FQDN of your mailcow host: \n${MAILCOW_HOSTNAME}\n \n1\n. This record is usually set at the provider you leased the IP (server) from.\n\n\nThe minimal DNS configuration\n\n\nThis example shows you a set of records for one domain managed by mailcow. Each domain that is added to mailcow needs at least this set or records to function correctly.\n\n\n# Name              Type       Value\nmail                IN A       1.2.3.4\nautodiscover        IN CNAME   mail\nautoconfig          IN CNAME   mail\n\n@                   IN MX 10   mail\n\n\n\n\nDKIM, SPF and DMARC\n\n\nIn the example DNS zone file snippet below, a simple \nSPF\n TXT record is used to only allow THIS server (the MX) to send mail for your domain. Every other server is disallowed but able to (\"\n~all\n\"). Please refer to \nSPF Project\n for further reading.\n\n\n@                   IN TXT     \nv=spf1 mx ~all\n\n\n\n\n\nIt is highly recommended to create a \nDKIM\n TXT record in your mailcow UI and set the corresponding TXT record in your DNS records. Please refer to \nOpenDKIM\n for further reading.\n\n\ndkim._domainkey  IN TXT     \nv=DKIM1; k=rsa; t=s; s=email; p=...\n\n\n\n\n\nThe last step in protecting yourself and others is the implementation of a \nDMARC\n TXT record, for example by using the \nDMARC Assistant\n (\ncheck\n).\n\n\n_dmarc              IN TXT     \nv=DMARC1; p=reject; rua=mailto:mailauth-reports@example.org\n\n\n\n\n\nThe advanced DNS configuration\n\n\nSRV\n records specify the server(s) for a specific protocol on your domain. If you want to explicitly announce a service as not provided, give \".\" as the target address (instead of \"mail.example.tld.\"). Please refer to \nRFC 2782\n.\n\n\n_imap._tcp          IN SRV     0 1 143   mail.example.org.\n_imaps._tcp         IN SRV     0 1 993   mail.example.org.\n_pop3._tcp          IN SRV     0 1 110   mail.example.org.\n_pop3s._tcp         IN SRV     0 1 995   mail.example.org.\n_submission._tcp    IN SRV     0 1 587   mail.example.org.\n_smtps._tcp         IN SRV     0 1 465   mail.example.org.\n_sieve._tcp         IN SRV     0 1 4190  mail.example.org.\n_autodiscover._tcp  IN SRV     0 1 443   autodiscover.example.org.\n\n\n\n\nTesting\n\n\nHere are some tools you can use to verify your DNS configuration:\n\n\n\n\nMX Toolbox\n (DNS, SMTP, RBL)\n\n\nport25.com\n (DKIM, SPF)\n\n\nHAD Pilot\n (DKIM, DMARC, SPF)\n\n\nDMARC Analyzer\n (DMARC, SPF)\n\n\n\n\nMisc\n\n\nIf you are interested in statistics, you can additionally register with the \nPostmaster Tool\n  by Google and supply a \ngoogle-site-verification\n TXT record, which will give you details about spam-classified mails by your domain. This is clearly optional.\n\n\n@                   IN TXT     \ngoogle-site-verification=...\n\n\n\n\n\n\n\n\n\n\n\n\n\nA \nFully Qualified Domain Name\n (\nFQDN\n) is the complete (absolute) domain name for a specific computer or host, on the Internet. The FQDN consists of at least three parts divided by a dot: the hostname (myhost), the domain name (mydomain) and the top level domain in short \ntld\n (com). In the example of \nmx.mailcow.email\n the hostname would be \nmx\n, the domain name 'mailcow' and the tld \nemail\n.", 
+            "title": "DNS Setup"
+        }, 
+        {
+            "location": "/prerequesite-dns/#references", 
+            "text": "A good article covering all relevant topics:\n   \"3 DNS Records Every Email Marketer Must Know\"  Another great one, but Zimbra as an example platform:\n   \"Best Practices on Email Protection: SPF, DKIM and DMARC\"  An in-depth discussion of SPF, DKIM and DMARC:\n   \"How to eliminate spam and protect your name with DMARC\"", 
+            "title": "References"
+        }, 
+        {
+            "location": "/prerequesite-dns/#reverse-dns-of-your-ip", 
+            "text": "Make sure that the PTR record of your IP matches the FQDN of your mailcow host:  ${MAILCOW_HOSTNAME}   1 . This record is usually set at the provider you leased the IP (server) from.", 
+            "title": "Reverse DNS of your IP"
+        }, 
+        {
+            "location": "/prerequesite-dns/#the-minimal-dns-configuration", 
+            "text": "This example shows you a set of records for one domain managed by mailcow. Each domain that is added to mailcow needs at least this set or records to function correctly.  # Name              Type       Value\nmail                IN A       1.2.3.4\nautodiscover        IN CNAME   mail\nautoconfig          IN CNAME   mail\n\n@                   IN MX 10   mail", 
+            "title": "The minimal DNS configuration"
+        }, 
+        {
+            "location": "/prerequesite-dns/#dkim-spf-and-dmarc", 
+            "text": "In the example DNS zone file snippet below, a simple  SPF  TXT record is used to only allow THIS server (the MX) to send mail for your domain. Every other server is disallowed but able to (\" ~all \"). Please refer to  SPF Project  for further reading.  @                   IN TXT      v=spf1 mx ~all   It is highly recommended to create a  DKIM  TXT record in your mailcow UI and set the corresponding TXT record in your DNS records. Please refer to  OpenDKIM  for further reading.  dkim._domainkey  IN TXT      v=DKIM1; k=rsa; t=s; s=email; p=...   The last step in protecting yourself and others is the implementation of a  DMARC  TXT record, for example by using the  DMARC Assistant  ( check ).  _dmarc              IN TXT      v=DMARC1; p=reject; rua=mailto:mailauth-reports@example.org", 
+            "title": "DKIM, SPF and DMARC"
+        }, 
+        {
+            "location": "/prerequesite-dns/#the-advanced-dns-configuration", 
+            "text": "SRV  records specify the server(s) for a specific protocol on your domain. If you want to explicitly announce a service as not provided, give \".\" as the target address (instead of \"mail.example.tld.\"). Please refer to  RFC 2782 .  _imap._tcp          IN SRV     0 1 143   mail.example.org.\n_imaps._tcp         IN SRV     0 1 993   mail.example.org.\n_pop3._tcp          IN SRV     0 1 110   mail.example.org.\n_pop3s._tcp         IN SRV     0 1 995   mail.example.org.\n_submission._tcp    IN SRV     0 1 587   mail.example.org.\n_smtps._tcp         IN SRV     0 1 465   mail.example.org.\n_sieve._tcp         IN SRV     0 1 4190  mail.example.org.\n_autodiscover._tcp  IN SRV     0 1 443   autodiscover.example.org.", 
+            "title": "The advanced DNS configuration"
+        }, 
+        {
+            "location": "/prerequesite-dns/#testing", 
+            "text": "Here are some tools you can use to verify your DNS configuration:   MX Toolbox  (DNS, SMTP, RBL)  port25.com  (DKIM, SPF)  HAD Pilot  (DKIM, DMARC, SPF)  DMARC Analyzer  (DMARC, SPF)", 
+            "title": "Testing"
+        }, 
+        {
+            "location": "/prerequesite-dns/#misc", 
+            "text": "If you are interested in statistics, you can additionally register with the  Postmaster Tool   by Google and supply a  google-site-verification  TXT record, which will give you details about spam-classified mails by your domain. This is clearly optional.  @                   IN TXT      google-site-verification=...       A  Fully Qualified Domain Name  ( FQDN ) is the complete (absolute) domain name for a specific computer or host, on the Internet. The FQDN consists of at least three parts divided by a dot: the hostname (myhost), the domain name (mydomain) and the top level domain in short  tld  (com). In the example of  mx.mailcow.email  the hostname would be  mx , the domain name 'mailcow' and the tld  email .", 
+            "title": "Misc"
+        }, 
+        {
+            "location": "/migrate-mc014/", 
+            "text": "Warning\n\n\nPlease be adviced that this guide is a first draft. mailcow: dockerized changed quite a lot on its DB configuration. It now uses the InnoDB file format \nBarracuda\n and the \nutf8mb4\n character set. There is also some change to the DB / TABLE structure.\n\n\n\n\n\n\nInfo\n\n\nAlso note that this guide doesn't touch on the users settings like \nSpamlevels\n, \nTLS Settings\n, etc. nor the export / import of your roundcube or SOGo settings.\n\n\nLastly please check the section on how to \nimport / restore\n your maildir backup to get an idea how to migrate your mails.\n\n\n\n\nCreate mailcow db backups\n\n\nFirst you need to modify the table \nmailcow\n. mailcow: dockerized adds three and moves two existing columns in the table \nmailbox\n. The columns \ntls_enforce_in\n and \ntls_enforce_out\n get moved two rows up (behind \ndomain\n). The columns \nkey\n, \nmultiple_bookings\n and \nwants_tagged_subject\n need to be added after \ntls_enforce_out\n.\n\n\nIt should look like this:\n\n\nMariaDB [mailcow]\n desc mailbox;\n+----------------------+--------------+------+-----+-------------------+-----------------------------+\n| Field                | Type         | Null | Key | Default           | Extra                       |\n+----------------------+--------------+------+-----+-------------------+-----------------------------+\n| username             | varchar(255) | NO   | PRI | NULL              |                             |\n| password             | varchar(255) | NO   |     | NULL              |                             |\n| name                 | varchar(255) | YES  |     | NULL              |                             |\n| maildir              | varchar(255) | NO   |     | NULL              |                             |\n| quota                | bigint(20)   | NO   |     | 0                 |                             |\n| local_part           | varchar(255) | NO   |     | NULL              |                             |\n| domain               | varchar(255) | NO   | MUL | NULL              |                             |\n| tls_enforce_in       | tinyint(1)   | NO   |     | 0                 |                             |\n| tls_enforce_out      | tinyint(1)   | NO   |     | 0                 |                             |\n| kind                 | varchar(100) | NO   |     |                   |                             |\n| multiple_bookings    | tinyint(1)   | NO   |     | 0                 |                             |\n| wants_tagged_subject | tinyint(1)   | NO   |     | 0                 |                             |\n| created              | datetime     | NO   |     | CURRENT_TIMESTAMP |                             |\n| modified             | datetime     | YES  |     | NULL              | on update CURRENT_TIMESTAMP |\n| active               | tinyint(1)   | NO   |     | 1                 |                             |\n+----------------------+--------------+------+-----+-------------------+-----------------------------+\n\n\n\n\nYou can do this with a UI like \nAdminer\n or use the MySQL CLI like :\n\n\nMariaDB [mailcow]\n ALTER TABLE mailbox MODIFY COLUMN tls_enforce_in TINYINT(1) NOT NULL DEFAULT \n0\n AFTER domain,\nMODIFY COLUMN tls_enforce_out TINYINT(1) NOT NULL DEFAULT \n0\n AFTER tls_enforce_in;\nMariaDB [mailcow]\n ALTER TABLE mailbox ADD COLUMN `kind` VARCHAR(255) NOT NULL AFTER `tls_enforce_out`,\nADD COLUMN `multiple_bookings` TINYINT(1) NOT NULL DEFAULT \n0\n AFTER `kind`,\nADD COLUMN `wants_tagged_subject` TINYINT(1) NOT NULL DEFAULT \n0\n AFTER `multiple_bookings`;\nMariaDB [mailcow]\n DESC mailbox;\n\n\n\n\nWhen this is done we can backup the tables:\n\n\n# Load your mysql variables into environment\n\n\nDBHOST\n=\n$(\ngrep database_host /var/www/mail/inc/vars.inc.php \n|\n cut -d\n -f2\n)\n\n\nDBNAME\n=\n$(\ngrep database_name /var/www/mail/inc/vars.inc.php \n|\n cut -d\n -f2\n)\n\n\nDBUSER\n=\n$(\ngrep database_user /var/www/mail/inc/vars.inc.php \n|\n cut -d\n -f2\n)\n\n\nDBPASS\n=\n$(\ngrep database_pass /var/www/mail/inc/vars.inc.php \n|\n cut -d\n -f2\n)\n\n\n\n# Backup your tables\n\nmysqldump --replace --no-create-info --default-character-set\n=\nutf8mb4 \n\\\n\n    --host \n${\nDBHOST\n}\n -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n \n\\\n\n    \nalias\n alias_domain domain domain_admins mailbox quota2 sender_acl \n backup_mailcow.sql\n\n\n\n\n\n\nInfo\n\n\n\n\n--replace\n: Write \nREPLACE\n statements rather than \nINSERT\n statements\n\n\n--no-create-info\n: Don't write \nCREATE TABLE\n statements.\n\n\n--default-character-set\n make sure our exported default charset is \nutf8mb4\n.\n\n\n\n\n\n\nPrepare mailcow: dockerized\n\n\nTo initiate your fresh installed database, visit \nhttps://${MAILCOW_HOSTNAME}\n with a browser of your choice. Check if the DB is initiated correctly afterwards:\n\n\n# source mailcow.conf\n# docker-compose exec mysql-mailcow mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n\nMariaDB [mailcow]\n show tables;\n+-------------------------------+\n| Tables_in_mailcow             |\n+-------------------------------+\n| admin                         |\n| alias                         |\n[...]\n\n\n\n\nImport your backups:\n\n\n# source mailcow.conf\n# docker exec -i $(docker-compose ps -q mysql-mailcow) mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n \n backup\n_mailcow.sql\n\n\n\n\n\nRecalculate used quota with \ndoveadm\n:\n\n\n# docker-compose exec dovecot-mailcow doveadm quota recalc -A\n\n\n\n\nRestart services:\n\n\n# docker-compose restart", 
+            "title": "Migrating from mailcow 0.14"
+        }, 
+        {
+            "location": "/migrate-mc014/#create-mailcow-db-backups", 
+            "text": "First you need to modify the table  mailcow . mailcow: dockerized adds three and moves two existing columns in the table  mailbox . The columns  tls_enforce_in  and  tls_enforce_out  get moved two rows up (behind  domain ). The columns  key ,  multiple_bookings  and  wants_tagged_subject  need to be added after  tls_enforce_out .  It should look like this:  MariaDB [mailcow]  desc mailbox;\n+----------------------+--------------+------+-----+-------------------+-----------------------------+\n| Field                | Type         | Null | Key | Default           | Extra                       |\n+----------------------+--------------+------+-----+-------------------+-----------------------------+\n| username             | varchar(255) | NO   | PRI | NULL              |                             |\n| password             | varchar(255) | NO   |     | NULL              |                             |\n| name                 | varchar(255) | YES  |     | NULL              |                             |\n| maildir              | varchar(255) | NO   |     | NULL              |                             |\n| quota                | bigint(20)   | NO   |     | 0                 |                             |\n| local_part           | varchar(255) | NO   |     | NULL              |                             |\n| domain               | varchar(255) | NO   | MUL | NULL              |                             |\n| tls_enforce_in       | tinyint(1)   | NO   |     | 0                 |                             |\n| tls_enforce_out      | tinyint(1)   | NO   |     | 0                 |                             |\n| kind                 | varchar(100) | NO   |     |                   |                             |\n| multiple_bookings    | tinyint(1)   | NO   |     | 0                 |                             |\n| wants_tagged_subject | tinyint(1)   | NO   |     | 0                 |                             |\n| created              | datetime     | NO   |     | CURRENT_TIMESTAMP |                             |\n| modified             | datetime     | YES  |     | NULL              | on update CURRENT_TIMESTAMP |\n| active               | tinyint(1)   | NO   |     | 1                 |                             |\n+----------------------+--------------+------+-----+-------------------+-----------------------------+  You can do this with a UI like  Adminer  or use the MySQL CLI like :  MariaDB [mailcow]  ALTER TABLE mailbox MODIFY COLUMN tls_enforce_in TINYINT(1) NOT NULL DEFAULT  0  AFTER domain,\nMODIFY COLUMN tls_enforce_out TINYINT(1) NOT NULL DEFAULT  0  AFTER tls_enforce_in;\nMariaDB [mailcow]  ALTER TABLE mailbox ADD COLUMN `kind` VARCHAR(255) NOT NULL AFTER `tls_enforce_out`,\nADD COLUMN `multiple_bookings` TINYINT(1) NOT NULL DEFAULT  0  AFTER `kind`,\nADD COLUMN `wants_tagged_subject` TINYINT(1) NOT NULL DEFAULT  0  AFTER `multiple_bookings`;\nMariaDB [mailcow]  DESC mailbox;  When this is done we can backup the tables:  # Load your mysql variables into environment  DBHOST = $( grep database_host /var/www/mail/inc/vars.inc.php  |  cut -d  -f2 )  DBNAME = $( grep database_name /var/www/mail/inc/vars.inc.php  |  cut -d  -f2 )  DBUSER = $( grep database_user /var/www/mail/inc/vars.inc.php  |  cut -d  -f2 )  DBPASS = $( grep database_pass /var/www/mail/inc/vars.inc.php  |  cut -d  -f2 )  # Backup your tables \nmysqldump --replace --no-create-info --default-character-set = utf8mb4  \\ \n    --host  ${ DBHOST }  -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }   \\ \n     alias  alias_domain domain domain_admins mailbox quota2 sender_acl   backup_mailcow.sql   Info   --replace : Write  REPLACE  statements rather than  INSERT  statements  --no-create-info : Don't write  CREATE TABLE  statements.  --default-character-set  make sure our exported default charset is  utf8mb4 .", 
+            "title": "Create mailcow db backups"
+        }, 
+        {
+            "location": "/migrate-mc014/#prepare-mailcow-dockerized", 
+            "text": "To initiate your fresh installed database, visit  https://${MAILCOW_HOSTNAME}  with a browser of your choice. Check if the DB is initiated correctly afterwards:  # source mailcow.conf\n# docker-compose exec mysql-mailcow mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME } \nMariaDB [mailcow]  show tables;\n+-------------------------------+\n| Tables_in_mailcow             |\n+-------------------------------+\n| admin                         |\n| alias                         |\n[...]", 
+            "title": "Prepare mailcow: dockerized"
+        }, 
+        {
+            "location": "/migrate-mc014/#import-your-backups", 
+            "text": "# source mailcow.conf\n# docker exec -i $(docker-compose ps -q mysql-mailcow) mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }    backup _mailcow.sql   Recalculate used quota with  doveadm :  # docker-compose exec dovecot-mailcow doveadm quota recalc -A  Restart services:  # docker-compose restart", 
+            "title": "Import your backups:"
+        }, 
+        {
+            "location": "/install/", 
+            "text": "You need Docker and Docker Compose.\n\n\n1.\n Learn how to install \nDocker\n and \nDocker Compose\n.\n\n\nQuick installation for most operation systems:\n\n\n\n\n\n\nDocker\n\ncurl -sSL https://get.docker.com/ | sh\n\n\n\n\n\n\n\nDocker-Compose\n\ncurl -L https://github.com/docker/compose/releases/download/$(curl -Ls https://www.servercow.de/docker-compose/latest.php)/docker-compose-$(uname -s)-$(uname -m) \n /usr/local/bin/docker-compose\nchmod +x /usr/local/bin/docker-compose\n\n\n\n\n\n\n\nPlease use the latest Docker engine available and do not use the engine that ships with your distros repository.\n\n\n2.\n Clone the master branch of the repository\n\ngit clone https://github.com/mailcow/mailcow-dockerized \n cd mailcow-dockerized\n\n\n\n3.\n Generate a configuration file. Use a FQDN (\nhost.domain.tld\n) as hostname when asked.\n\n./generate_config.sh\n\n\n\n4.\n Change configuration if you want or need to.\n\nnano mailcow.conf\n\n\nIf you plan to use a reverse proxy, you can, for example, bind HTTPS to 127.0.0.1 on port 8443 and HTTP to 127.0.0.1 on port 8080.\n\n\nYou may need to stop an existing pre-installed MTA which blocks port 25/tcp. See \nthis chapter\n to learn how to reconfigure Postfix to run besides mailcow after a successful installation.\n\n\n5.\n Pull the images and run the composer file. The parameter \n-d\n will start mailcow: dockerized detached:\n\ndocker-compose pull\ndocker-compose up -d\n\n\n\nDone!\n\n\nYou can now access \nhttps://${MAILCOW_HOSTNAME}\n with the default credentials \nadmin\n + password \nmoohoo\n.\n\n\nThe database will be initialized right after a connection to MySQL can be established.", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/install-update/", 
+            "text": "Automatic update\n\n\nAn update script in your mailcow-dockerized directory will take care of updates.\n\n\nBut use it with caution! If you think you made a lot of changes to the mailcow code, you should use the manual update guide below.\n\n\nRun the update script:\n\n./update.sh\n\n\n\nIf it needs to, it will ask you how you wish to proceed.\nMerge errors will be reported.\nSome minor conflicts will be auto-corrected (in favour of the mailcow: dockerized repository code).\n\n\nManual update\n\n\nStep 1\n\n\nYou may want to backup your certificates, as an upgrade from an older mailcow: dockerized version may remove these files:\n\n\ncp -rp data/assets/ssl /tmp/ssl_backup_mailcow\n\n\n\n\nFetch new data from GitHub, commit changes and merge remote repository:\n\n\n# 1. Get updates/changes\ngit fetch origin master\n# 2. Add all changed files to local clone\ngit add -A\n# 3. Commit changes, ignore git complaining about username and mail address\ngit commit -m \nLocal config at $(date)\n\n# 4. Merge changes, prefere mailcow repository\ngit merge -Xtheirs -Xpatience\n\n# If it conflicts with files that were deleted from the mailcow repository, just run...\ngit status --porcelain | grep -E \nUD|DU\n | awk \n{print $2}\n | xargs rm -v\n# ...and repeat step 2 and 3\n\n\n\n\nCheck data/assets/ssl for your certificates (and dhparams.pem). If you miss them, recover your files:\n\n\ncp -rp /tmp/ssl_backup_mailcow/* data/assets/ssl/\n\n\n\n\nStep 2\n\n\nWhen upgrading from a version older than May 13th, 2017 to a version released after that date, you need to run the following command first as network settings have been changed:\n\n\ndocker-compose down\n\n\n\n\nPull new images (if any) and recreate changed containers:\n\n\ndocker-compose pull\ndocker-compose up -d --remove-orphans\n\n\n\n\nStep 3\n\n\nClean-up dangling (unused) images and volumes:\n\n\nIt is \nvery important\n to \nnot\n run these commands when your containers are deleted.\nRunning \ndocker-compose down\n - for example - will delete your containers. Your volumes are now in a dangling state! Running the commands shown below, \nwill\n remove your volumes and therefore your data.\n\n\ndocker rmi -f $(docker images -f \ndangling=true\n -q)\ndocker volume rm $(docker volume ls -qf dangling=true)", 
+            "title": "Update"
+        }, 
+        {
+            "location": "/install-update/#automatic-update", 
+            "text": "An update script in your mailcow-dockerized directory will take care of updates.  But use it with caution! If you think you made a lot of changes to the mailcow code, you should use the manual update guide below.  Run the update script: ./update.sh  If it needs to, it will ask you how you wish to proceed.\nMerge errors will be reported.\nSome minor conflicts will be auto-corrected (in favour of the mailcow: dockerized repository code).", 
+            "title": "Automatic update"
+        }, 
+        {
+            "location": "/install-update/#manual-update", 
+            "text": "", 
+            "title": "Manual update"
+        }, 
+        {
+            "location": "/install-update/#step-1", 
+            "text": "You may want to backup your certificates, as an upgrade from an older mailcow: dockerized version may remove these files:  cp -rp data/assets/ssl /tmp/ssl_backup_mailcow  Fetch new data from GitHub, commit changes and merge remote repository:  # 1. Get updates/changes\ngit fetch origin master\n# 2. Add all changed files to local clone\ngit add -A\n# 3. Commit changes, ignore git complaining about username and mail address\ngit commit -m  Local config at $(date) \n# 4. Merge changes, prefere mailcow repository\ngit merge -Xtheirs -Xpatience\n\n# If it conflicts with files that were deleted from the mailcow repository, just run...\ngit status --porcelain | grep -E  UD|DU  | awk  {print $2}  | xargs rm -v\n# ...and repeat step 2 and 3  Check data/assets/ssl for your certificates (and dhparams.pem). If you miss them, recover your files:  cp -rp /tmp/ssl_backup_mailcow/* data/assets/ssl/", 
+            "title": "Step 1"
+        }, 
+        {
+            "location": "/install-update/#step-2", 
+            "text": "When upgrading from a version older than May 13th, 2017 to a version released after that date, you need to run the following command first as network settings have been changed:  docker-compose down  Pull new images (if any) and recreate changed containers:  docker-compose pull\ndocker-compose up -d --remove-orphans", 
+            "title": "Step 2"
+        }, 
+        {
+            "location": "/install-update/#step-3", 
+            "text": "Clean-up dangling (unused) images and volumes:  It is  very important  to  not  run these commands when your containers are deleted.\nRunning  docker-compose down  - for example - will delete your containers. Your volumes are now in a dangling state! Running the commands shown below,  will  remove your volumes and therefore your data.  docker rmi -f $(docker images -f  dangling=true  -q)\ndocker volume rm $(docker volume ls -qf dangling=true)", 
+            "title": "Step 3"
+        }, 
+        {
+            "location": "/firststeps-ssl/", 
+            "text": "Let's Encrypt (out-of-the-box)\n\n\nThe newly introduced \"acme-mailcow\" container (21st of June) will try to obtain a valid LE certificate for you.\n\n\n\n\nWarning\n\n\nmailcow \nmust\n be available on port 80 for the acme-client to work.\n\n\n\n\nBy default, which means \n0 domains\n are added to mailcow, it will try to obtain a certificate for ${MAILCOW_HOSTNAME}.\n\n\nFor each domain you add, it will try to resolve autodiscover.ADDED_MAIL_DOMAIN and autoconfig.ADDED_MAIL_DOMAIN to your servers IPv4 address. If it succeeds, these names will be added as SANs to the certificate request.\n\n\nYou can skip the IP verification by adding SKIP_IP_CHECK=y to mailcow.conf (no quotes). Be warned that a misconfiguration will get you ratelimited by Let's Encrypt! This is primarily useful for multi-IP setups where the IP check would return the incorrect source IP. Due to using dynamic IPs for acme-mailcow, source NAT is not consistent over restarts.\n\n\nYou could add an A record for \"autodiscover\" but omit \"autoconfig\", the client will only validate \"autodiscover\" and skip \"autoconfig\" then.\n\n\nFor every domain you remove, the certificate will be moved and a new certificate will be requested. It is not possible to keep domains in a certificate, when we are not able validate the challenge for those.\n\n\nIf you want to re-run the ACME client, use \ndocker-compose restart acme-mailcow\n.\n\n\nAdditional domain names\n\n\nEdit \"mailcow.conf\" and add a parameter \"ADDITIONAL_SAN\" like this:\n\n\n\n\nInfo\n\n\nMake sure you are using acme-mailcow:1.5 or above in docker-compose.yml - if not, update mailcow first!\n\n\n\n\nDo not use quotes (\n\"\n)!\n\n\nADDITIONAL_SAN=cert1.example.org,cert1.example.com,cert2.example.org,cert3.example.org\n\n\n\n\nEach name will be validated against its IPv4 address.\n\n\nSkip Let's Encrypt function\n\n\nAdd \nSKIP_LETS_ENCRYPT=y\n to mailcow.conf and restart the stack by running \ndocker-compose down \n docker-compose up -d\n.\n\n\nUse own certificates\n\n\nTo use your own certificates, just save the combined certificate (containing the certificate and intermediate CA/CA if any) to \ndata/assets/ssl/cert.pem\n and the corresponding key to \ndata/assets/ssl/key.pem\n.\n\n\nRestart the mailcow stack by running \ndocker-compose down \n docker-compose up -d\n.\n\n\nCheck your configuration\n\n\nRun \ndocker-compose logs acme-mailcow\n to find out why a validation fails.\n\n\nTo check if nginx serves the correct certificate, simply use a browser of your choice and check the displayed certificate.\n\n\nTo check the certificate served by dovecot or postfix we will use \nopenssl\n:\n\n\n# Connect via SMTP (25)\nopenssl s_client -starttls smtp -crlf -connect mx.mailcow.email:25\n# Connect via SMTPS (465)\nopenssl s_client -showcerts -connect mx.mailcow.email:465\n# Connect via SUBMISSION (587)\nopenssl s_client -starttls smtp -crlf -connect mx.mailcow.email:587", 
+            "title": "SSL"
+        }, 
+        {
+            "location": "/firststeps-ssl/#lets-encrypt-out-of-the-box", 
+            "text": "The newly introduced \"acme-mailcow\" container (21st of June) will try to obtain a valid LE certificate for you.   Warning  mailcow  must  be available on port 80 for the acme-client to work.   By default, which means  0 domains  are added to mailcow, it will try to obtain a certificate for ${MAILCOW_HOSTNAME}.  For each domain you add, it will try to resolve autodiscover.ADDED_MAIL_DOMAIN and autoconfig.ADDED_MAIL_DOMAIN to your servers IPv4 address. If it succeeds, these names will be added as SANs to the certificate request.  You can skip the IP verification by adding SKIP_IP_CHECK=y to mailcow.conf (no quotes). Be warned that a misconfiguration will get you ratelimited by Let's Encrypt! This is primarily useful for multi-IP setups where the IP check would return the incorrect source IP. Due to using dynamic IPs for acme-mailcow, source NAT is not consistent over restarts.  You could add an A record for \"autodiscover\" but omit \"autoconfig\", the client will only validate \"autodiscover\" and skip \"autoconfig\" then.  For every domain you remove, the certificate will be moved and a new certificate will be requested. It is not possible to keep domains in a certificate, when we are not able validate the challenge for those.  If you want to re-run the ACME client, use  docker-compose restart acme-mailcow .", 
+            "title": "Let's Encrypt (out-of-the-box)"
+        }, 
+        {
+            "location": "/firststeps-ssl/#additional-domain-names", 
+            "text": "Edit \"mailcow.conf\" and add a parameter \"ADDITIONAL_SAN\" like this:   Info  Make sure you are using acme-mailcow:1.5 or above in docker-compose.yml - if not, update mailcow first!   Do not use quotes ( \" )!  ADDITIONAL_SAN=cert1.example.org,cert1.example.com,cert2.example.org,cert3.example.org  Each name will be validated against its IPv4 address.  Skip Let's Encrypt function  Add  SKIP_LETS_ENCRYPT=y  to mailcow.conf and restart the stack by running  docker-compose down   docker-compose up -d .", 
+            "title": "Additional domain names"
+        }, 
+        {
+            "location": "/firststeps-ssl/#use-own-certificates", 
+            "text": "To use your own certificates, just save the combined certificate (containing the certificate and intermediate CA/CA if any) to  data/assets/ssl/cert.pem  and the corresponding key to  data/assets/ssl/key.pem .  Restart the mailcow stack by running  docker-compose down   docker-compose up -d .", 
+            "title": "Use own certificates"
+        }, 
+        {
+            "location": "/firststeps-ssl/#check-your-configuration", 
+            "text": "Run  docker-compose logs acme-mailcow  to find out why a validation fails.  To check if nginx serves the correct certificate, simply use a browser of your choice and check the displayed certificate.  To check the certificate served by dovecot or postfix we will use  openssl :  # Connect via SMTP (25)\nopenssl s_client -starttls smtp -crlf -connect mx.mailcow.email:25\n# Connect via SMTPS (465)\nopenssl s_client -showcerts -connect mx.mailcow.email:465\n# Connect via SUBMISSION (587)\nopenssl s_client -starttls smtp -crlf -connect mx.mailcow.email:587", 
+            "title": "Check your configuration"
+        }, 
+        {
+            "location": "/firststeps-rspamd_ui/", 
+            "text": "At first you may want to setup Rspamds web interface which provides some useful features and information.\n\n\n1. Generate a Rspamd controller password hash:\n\ndocker-compose exec rspamd-mailcow rspamadm pw\n\n\n\n2. Replace the default hash in \ndata/conf/rspamd/override.d/worker-controller.inc\n by your newly generated:\n\nenable_password = \nmyhash\n;\n\n\n\nYou can use \npassword = \"myhash\";\n instead of \nenable_password\n to disable write-access in the web UI.\n\n\n3. Restart rspamd:\n\ndocker-compose restart rspamd-mailcow\n\n\n\nOpen https://${MAILCOW_HOSTNAME}/rspamd in a browser and login!", 
+            "title": "Rspamd Web UI"
+        }, 
+        {
+            "location": "/firststeps-rp/", 
+            "text": "You don't need to change the Nginx site that comes with mailcow: dockerized.\nmailcow: dockerized trusts the default gateway IP 172.22.1.1 as proxy. This is very important to control access to Rspamd's web UI.\n\n\n1. Make sure you change HTTP_BIND and HTTPS_BIND in \nmailcow.conf\n to a local address and set the ports accordingly, for example:\n\nHTTP_BIND\n=\n127\n.0.0.1\n\nHTTP_PORT\n=\n8080\n\n\nHTTPS_BIND\n=\n127\n.0.0.1\n\nHTTPS_PORT\n=\n8443\n\n\n\n** IMPORTANT: Do not use port 8081 **\n\n\nRecreate affected containers by running \ndocker-compose up -d\n.\n\n\n2. Configure your local webserver as reverse proxy:\n\n\nApache 2.4\n\n\nVirtualHost\n \n*:443\n\n    \nServerName\n mail.example.org\n    \nServerAlias\n autodiscover.example.org\n    \nServerAlias\n autoconfig.example.org\n\n    \n[\n...\n]\n\n    \n# You should proxy to a plain HTTP session to offload SSL processing\n\n    \nProxyPass\n / http://127.0.0.1:8080/\n    \nProxyPassReverse\n / http://127.0.0.1:8080/\n\n    \nProxyPreserveHost\n \nOn\n\n    \nProxyAddHeaders\n \nOn\n\n\n    \n# This header does not need to be set when using http\n\n    \nRequestHeader\n set X-Forwarded-Proto \nhttps\n\n\n    \nyour-ssl-configuration-\nhere\n\n    [...]\n\n    \n# If you plan to proxy to a HTTPS host:\n\n    \n#SSLProxyEngine On\n\n\n    \n# If you plan to proxy to an untrusted HTTPS host:\n\n    \n#SSLProxyVerify none\n\n    \n#SSLProxyCheckPeerCN off\n\n    \n#SSLProxyCheckPeerName off\n\n    \n#SSLProxyCheckPeerExpire off\n\n\n/VirtualHost\n\n\n\n\n\nNginx\n\n\nserver\n \n{\n\n    \nlisten\n \n443\n;\n\n    \nserver_name\n \nmail.example.org\n \nautodiscover.example.org\n \nautoconfig.example.org\n;\n\n\n    \n[\n...\n]\n\n    \nyour-ssl-configuration-here\n\n\n    \nlocation\n \n/\n \n{\n\n        \nproxy_pass\n \nhttp\n:\n//\n127.0.0.1\n:\n8080\n/\n;\n\n        \nproxy_set_header\n \nHost\n \n$http_host\n;\n\n        \nproxy_set_header\n \nX-Real-IP\n \n$remote_addr\n;\n\n        \nproxy_set_header\n \nX-Forwarded-For\n \n$proxy_add_x_forwarded_for\n;\n\n        \nproxy_set_header\n \nX-Forwarded-Proto\n \n$scheme\n;\n\n        \nclient_max_body_size\n \n100m\n;\n\n    \n}\n\n    \n[\n...\n]\n\n\n}\n\n\n\n\n\nHAProxy\n\n\nfrontend https-in\n  bind :::443 v4v6 ssl crt mailcow.pem\n  default_backend mailcow\n\nbackend mailcow\n  option forwardfor\n  http-request set-header X-Forwarded-Proto https if { ssl_fc }\n  http-request set-header X-Forwarded-Proto http if !{ ssl_fc }\n  server mailcow 127.0.0.1:8080 check", 
+            "title": "Reverse Proxy"
+        }, 
+        {
+            "location": "/firststeps-rp/#apache-24", 
+            "text": "VirtualHost   *:443 \n     ServerName  mail.example.org\n     ServerAlias  autodiscover.example.org\n     ServerAlias  autoconfig.example.org\n\n     [ ... ] \n     # You should proxy to a plain HTTP session to offload SSL processing \n     ProxyPass  / http://127.0.0.1:8080/\n     ProxyPassReverse  / http://127.0.0.1:8080/\n\n     ProxyPreserveHost   On \n     ProxyAddHeaders   On \n\n     # This header does not need to be set when using http \n     RequestHeader  set X-Forwarded-Proto  https \n\n     your-ssl-configuration- here \n    [...]\n\n     # If you plan to proxy to a HTTPS host: \n     #SSLProxyEngine On \n\n     # If you plan to proxy to an untrusted HTTPS host: \n     #SSLProxyVerify none \n     #SSLProxyCheckPeerCN off \n     #SSLProxyCheckPeerName off \n     #SSLProxyCheckPeerExpire off  /VirtualHost", 
+            "title": "Apache 2.4"
+        }, 
+        {
+            "location": "/firststeps-rp/#nginx", 
+            "text": "server   { \n     listen   443 ; \n     server_name   mail.example.org   autodiscover.example.org   autoconfig.example.org ; \n\n     [ ... ] \n     your-ssl-configuration-here \n\n     location   /   { \n         proxy_pass   http : // 127.0.0.1 : 8080 / ; \n         proxy_set_header   Host   $http_host ; \n         proxy_set_header   X-Real-IP   $remote_addr ; \n         proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for ; \n         proxy_set_header   X-Forwarded-Proto   $scheme ; \n         client_max_body_size   100m ; \n     } \n     [ ... ]  }", 
+            "title": "Nginx"
+        }, 
+        {
+            "location": "/firststeps-rp/#haproxy", 
+            "text": "frontend https-in\n  bind :::443 v4v6 ssl crt mailcow.pem\n  default_backend mailcow\n\nbackend mailcow\n  option forwardfor\n  http-request set-header X-Forwarded-Proto https if { ssl_fc }\n  http-request set-header X-Forwarded-Proto http if !{ ssl_fc }\n  server mailcow 127.0.0.1:8080 check", 
+            "title": "HAProxy"
+        }, 
+        {
+            "location": "/firststeps-relayhost/", 
+            "text": "As of September 12th you can setup relayhosts as admin by using the mailcow UI.\n\n\nEdit a domain afterwards and assign a relayhost for it to use.", 
+            "title": "Setup a relayhost"
+        }, 
+        {
+            "location": "/firststeps-logging/", 
+            "text": "Logging in mailcow: dockerized consists of multiple stages, but is, after all, much more flexible and easier to integrate into a logging daemon than before.\n\n\nIn Docker the containerized application (PID 1) writes its output to stdout. For real one-application containers this works just fine.\n\n\nSome containers log or stream to multiple destinations.\n\n\nNo container will keep persistent logs in it. Containers are transient items!\n\n\nIn the end, every line of logs will reach the Docker daemon - unfiltered.\n\n\nThe \ndefault logging driver is \"json\"\n.\n\n\nFiltered logs\n\n\nSome logs are filtered and written to Redis keys but also streamed to a Redis channel.\n\n\nThe Redis channel is used to stream logs with failed authentication attempts to be read by fail2ban-mailcow.\n\n\nThe Redis keys are persistent and will keep 10000 lines of logs for the web UI.\n\n\nThis mechanism makes it possible to use whatever Docker logging driver you want to, without losing \nthe ability to read logs from the UI or ban suspicious clients with fail2ban-mailcow.\n\n\nRedis keys will only hold logs from applications and filter out system messages (think of cron etc.).\n\n\nLogging drivers\n\n\nHere is the good news: Since Docker has some great logging drivers, you can integrate mailcow: dockerized into your existing logging environment with ease.\n\n\nDocker logging drivers can now be implemented as plugins, next to Dockers integrated drivers.\nLogging driver plugins are available in Docker 17.05 and higher.\n\n\nEdit \ndocker-compose.yml\n and append, for example, this block to use the \"gelf\" logging plugin:\n\n\nlogging\n:\n\n  \nlog_driver\n:\n \ngelf\n\n  \noptions\n:\n\n    \ngelf\n-\naddress\n:\n \nudp://graylog:12201\n\n    \ngelf\n-\ntag\n:\n \nmailcow-logs\n\n\n\n\n\nLinux users can also add or edit the Docker daemons configuration file \n/etc/docker/daemon.json\n to affect the global logging behavior. Windows users please have a look at the \ndocker documentation\n:\n\n\n{\n...\n    \nlog-driver\n: \ngelf\n,\n    \nlog-opts\n: {\n        \ngelf-address\n: \nudp://graylog:12201\n\n        \ngelf-tag\n: \nmailcow-logs\n\n    }\n...\n}\n\n\n\n\nRestart the Docker daemon and run \ndocker-compose down \n docker-compose up -d\n to recreate the containers with the new logging driver.", 
+            "title": "Logging"
+        }, 
+        {
+            "location": "/firststeps-logging/#filtered-logs", 
+            "text": "Some logs are filtered and written to Redis keys but also streamed to a Redis channel.  The Redis channel is used to stream logs with failed authentication attempts to be read by fail2ban-mailcow.  The Redis keys are persistent and will keep 10000 lines of logs for the web UI.  This mechanism makes it possible to use whatever Docker logging driver you want to, without losing \nthe ability to read logs from the UI or ban suspicious clients with fail2ban-mailcow.  Redis keys will only hold logs from applications and filter out system messages (think of cron etc.).", 
+            "title": "Filtered logs"
+        }, 
+        {
+            "location": "/firststeps-logging/#logging-drivers", 
+            "text": "Here is the good news: Since Docker has some great logging drivers, you can integrate mailcow: dockerized into your existing logging environment with ease.  Docker logging drivers can now be implemented as plugins, next to Dockers integrated drivers.\nLogging driver plugins are available in Docker 17.05 and higher.  Edit  docker-compose.yml  and append, for example, this block to use the \"gelf\" logging plugin:  logging : \n   log_driver :   gelf \n   options : \n     gelf - address :   udp://graylog:12201 \n     gelf - tag :   mailcow-logs   Linux users can also add or edit the Docker daemons configuration file  /etc/docker/daemon.json  to affect the global logging behavior. Windows users please have a look at the  docker documentation :  {\n...\n     log-driver :  gelf ,\n     log-opts : {\n         gelf-address :  udp://graylog:12201 \n         gelf-tag :  mailcow-logs \n    }\n...\n}  Restart the Docker daemon and run  docker-compose down   docker-compose up -d  to recreate the containers with the new logging driver.", 
+            "title": "Logging drivers"
+        }, 
+        {
+            "location": "/firststeps-local_mta/", 
+            "text": "The easiest option would be to disable the listener on port 25/tcp.\n\n\nPostfix\n users disable the listener by commenting the following line (starting with \nsmtp\n or \n25\n) in \n/etc/postfix/master.cf\n:\n\n#smtp      inet  n       -       -       -       -       smtpd\n\n\n\nFurthermore, to relay over a dockerized mailcow, you may want to add \n172.22.1.1\n as relayhost and remove the Docker interface from \"inet_interfaces\":\n\n\npostconf -e \nrelayhost = 172.22.1.1\n\npostconf -e \nmynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128\n\npostconf -e \ninet_interfaces = loopback-only\n\n\n\n\n\n\"172.22.1.1\" is the mailcow created network gateway in Docker.\nRelaying over this interface is necessary (instead of - for example - relaying directly over ${MAILCOW_HOSTNAME}) to relay over a known internal network.\n\n\nRestart Postfix after applying your changes.", 
+            "title": "Local MTA on Docker host"
+        }, 
+        {
+            "location": "/firststeps-sender_rcv/", 
+            "text": "When a mailbox is created, a user is allowed to send mail from and receive mail for his own mailbox address.\n\n\nMailbox me@example.org is created. example.org is a primary domain.\nNote: a mailbox cannot be created in an alias domain.\n\nme@example.org is only known as me@example.org.\nme@example.org is allowed to send as me@example.org.\n\n\n\n\n\nWe can add an alias domain for example.org:\n\n\nAlias domain alias.com is added and assigned to primary domain example.org.\nme@example.org is now known as me@example.org and me@alias.com.\nme@example.org is now allowed to send as me@example.org and me@alias.com.\n\n\n\n\n\nWe can add aliases for a mailbox to receive mail for and to send from this new address.\n\n\nIt is important to know, that you are not able to receive mail for \nmy-alias@my-alias-domain.tld\n. You would need to create this particular alias.\n\n\nme@example.org is assigned the alias alias@example.org\nme@example.org is now known as alias@example.org, me@alias.com, alias@example.org\n\nme@example.org is NOT known as alias@alias.com.\n\n\n\n\n\nAdministrators and domain administrators can edit mailboxes to allow specific users to send as other mailbox users (\"delegate\" them).\n\n\nYou can choose between mailbox users or completely disable the sender check for domains.\n\n\nSOGo \"mail from\" addresses\n\n\nMailbox users can, obviously, select their own mailbox address, as well as all alias addresses and aliases that exist through alias domains.\n\n\nIf you want to select another \nexisting\n mailbox user as your \"mail from\" address, this user has to delegate you access through SOGo (see SOGo documentation). Moreover a mailcow (domain) administrator\nneeds to grant you access as described above.", 
+            "title": "Sender and receiver model"
+        }, 
+        {
+            "location": "/firststeps-sender_rcv/#sogo-mail-from-addresses", 
+            "text": "Mailbox users can, obviously, select their own mailbox address, as well as all alias addresses and aliases that exist through alias domains.  If you want to select another  existing  mailbox user as your \"mail from\" address, this user has to delegate you access through SOGo (see SOGo documentation). Moreover a mailcow (domain) administrator\nneeds to grant you access as described above.", 
+            "title": "SOGo \"mail from\" addresses"
+        }, 
+        {
+            "location": "/debug/", 
+            "text": "When a problem occurs, then always for a reason! What you want to do in such a case is:\n\n\n\n\nRead your logs; follow them to see what the reason for your problem is.\n\n\nFollow the leads given to you in your logfiles and start investigating.\n\n\nRestarting the troubled service or the whole stack to see if the problem persists.\n\n\nRead the documentation of the troubled service and search it's bugtracker for your problem.\n\n\nSearch our \nissues\n for your problem.\n\n\nCreate an issue\n over at our GitHub repository if you think your problem might be a bug or a missing feature you badly need. But please make sure, that you include \nall the logs\n and a full description to your problem.\n\n\nConnect to IRC (\nchat.freenode.net\n) and join our IRC channel \n#mailcow\n.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/debug-logs/", 
+            "text": "Warning\n\n\nThis section only applies for Dockers default logging driver (Json).\n\n\n\n\nTo view the logs of all mailcow: dockerized related containers, you can use \ndocker-compose logs\n inside your mailcow-dockerized folder that contains your \nmailcow.conf\n. This is usually a bit much, but you could trim the output with \n--tail=100\n to the last 100 lines per container, or add a \n-f\n to follow the live output of all your services.\n\n\nTo view the logs of a specific service you can use \ndocker-compose logs [options] $service_name\n\n\n\n\nInfo\n\n\nThe available options for the command \ndocker-compose logs\n are:\n\n\n\n\n--no-color\n: Produce monochrome output.\n\n\n-f\n: Follow the log output.\n\n\n-t\n: Show timestamps.\n\n\n--tail=\"all\"\n: Number of lines to show from the end of the logs for each container.", 
+            "title": "Logs"
+        }, 
+        {
+            "location": "/debug-attach_service/", 
+            "text": "Attaching a Container to your Shell\n\n\nTo attach a container to your shell you can simply run\n\n\ndocker-compose exec $Service_Name /bin/bash\n\n\n\n\nConnecting to Services\n\n\nIf you want to connect to a service / application directly it is always a good idea to \nsource mailcow.conf\n to get all relevant variables into your environment.\n\n\nMySQL\n\n\nsource mailcow.conf\ndocker-compose exec mysql-mailcow mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n\n\n\n\n\nRedis\n\n\ndocker-compose exec redis-mailcow redis-cli\n\n\n\n\nService Descriptions\n\n\nHere is a brief overview of what container / service does what:\n\n\n\n\n\n\n\n\nService Name\n\n\nService Descriptions\n\n\n\n\n\n\n\n\n\n\nunbound-mailcow\n\n\nLocal (DNSSEC) DNS Resolver\n\n\n\n\n\n\nmysql-mailcow\n\n\nStores SOGo's and most of mailcow's settings\n\n\n\n\n\n\npostfix-mailcow\n\n\nReceives and sends mails\n\n\n\n\n\n\ndovecot-mailcow\n\n\nUser logins and sieve filter\n\n\n\n\n\n\nredis-mailcow\n\n\nStorage back-end for DKIM keys, Rmilter and Rspamd\n\n\n\n\n\n\nrspamd-mailcow\n\n\nMail filtering system. Used for av handling, dkim signing, spam handling\n\n\n\n\n\n\nrmilter-mailcow\n\n\nIntegrates Rspamd into postfix\n\n\n\n\n\n\nclamd-mailcow\n\n\nScans attachments for viruses\n\n\n\n\n\n\nsogo-mailcow\n\n\nWebmail client that handles Microsoft ActiveSync and Cal- / CardDav\n\n\n\n\n\n\nnginx-mailcow\n\n\nNginx remote proxy that handles all mailcow related HTTP / HTTPS requests", 
+            "title": "Attach a Container"
+        }, 
+        {
+            "location": "/debug-attach_service/#attaching-a-container-to-your-shell", 
+            "text": "To attach a container to your shell you can simply run  docker-compose exec $Service_Name /bin/bash", 
+            "title": "Attaching a Container to your Shell"
+        }, 
+        {
+            "location": "/debug-attach_service/#connecting-to-services", 
+            "text": "If you want to connect to a service / application directly it is always a good idea to  source mailcow.conf  to get all relevant variables into your environment.", 
+            "title": "Connecting to Services"
+        }, 
+        {
+            "location": "/debug-attach_service/#mysql", 
+            "text": "source mailcow.conf\ndocker-compose exec mysql-mailcow mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }", 
+            "title": "MySQL"
+        }, 
+        {
+            "location": "/debug-attach_service/#redis", 
+            "text": "docker-compose exec redis-mailcow redis-cli", 
+            "title": "Redis"
+        }, 
+        {
+            "location": "/debug-attach_service/#service-descriptions", 
+            "text": "Here is a brief overview of what container / service does what:     Service Name  Service Descriptions      unbound-mailcow  Local (DNSSEC) DNS Resolver    mysql-mailcow  Stores SOGo's and most of mailcow's settings    postfix-mailcow  Receives and sends mails    dovecot-mailcow  User logins and sieve filter    redis-mailcow  Storage back-end for DKIM keys, Rmilter and Rspamd    rspamd-mailcow  Mail filtering system. Used for av handling, dkim signing, spam handling    rmilter-mailcow  Integrates Rspamd into postfix    clamd-mailcow  Scans attachments for viruses    sogo-mailcow  Webmail client that handles Microsoft ActiveSync and Cal- / CardDav    nginx-mailcow  Nginx remote proxy that handles all mailcow related HTTP / HTTPS requests", 
+            "title": "Service Descriptions"
+        }, 
+        {
+            "location": "/debug-reset_pw/", 
+            "text": "mailcow Admin Account\n\n\nReset mailcow admin to \nadmin:moohoo\n:\n\n\ncd mailcow_path\nbash mailcow-reset-admin.sh\n\n\n\n\nReset MySQL Passwords\n\n\nStop the stack by running \ndocker-compose stop\n.\n\n\nWhen the containers came to a stop, run this command:\n\n\ndocker-compose run --rm --entrypoint \n/bin/sh -c \ngosu mysql mysqld --skip-grant-tables \n sleep 10 \n mysql -hlocalhost -uroot \n exit 0\n mysql-mailcow\n\n\n\n\n1. Find database name\n\n\n# source mailcow.conf\n# docker-compose exec mysql-mailcow mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n\nMariaDB [(none)]\n show databases;\n+--------------------+\n| Database           |\n+--------------------+\n| information_schema |\n| mailcow_database   | \n=====\n| mysql              |\n| performance_schema |\n+--------------------+\n4 rows in set (0.00 sec)\n\n\n\n\n2. Reset one or more users\n\n\nBoth \"password\" and \"authentication_string\" exist. Currently \"password\" is used, but better set both.\n\n\nMariaDB [(none)]\n SELECT user FROM mysql.user;\n+--------------+\n| user         |\n+--------------+\n| mailcow_user | \n=====\n| root         |\n+--------------+\n2 rows in set (0.00 sec)\n\nMariaDB [(none)]\n FLUSH PRIVILEGES;\nMariaDB [(none)]\n UPDATE mysql.user SET authentication_string = PASSWORD(\ngotr00t\n), password = PASSWORD(\ngotr00t\n) WHERE User = \nroot\n AND Host = \n%\n;\nMariaDB [(none)]\n UPDATE mysql.user SET authentication_string = PASSWORD(\nmookuh\n), password = PASSWORD(\nmookuh\n) WHERE User = \nmailcow\n AND Host = \n%\n;\nMariaDB [(none)]\n FLUSH PRIVILEGES;\n\n\n\n\nRemove Two-Factor Authentication\n\n\nThis works similar to resetting a MySQL password, now we do it from the host without connecting to the MySQL CLI:\n\n\nsource mailcow.conf\ndocker-compose exec mysql-mailcow mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n -e \nDELETE FROM tfa WHERE username=\nYOUR_USERNAME\n;", 
+            "title": "Reset Passwords"
+        }, 
+        {
+            "location": "/debug-reset_pw/#mailcow-admin-account", 
+            "text": "Reset mailcow admin to  admin:moohoo :  cd mailcow_path\nbash mailcow-reset-admin.sh", 
+            "title": "mailcow Admin Account"
+        }, 
+        {
+            "location": "/debug-reset_pw/#reset-mysql-passwords", 
+            "text": "Stop the stack by running  docker-compose stop .  When the containers came to a stop, run this command:  docker-compose run --rm --entrypoint  /bin/sh -c  gosu mysql mysqld --skip-grant-tables   sleep 10   mysql -hlocalhost -uroot   exit 0  mysql-mailcow", 
+            "title": "Reset MySQL Passwords"
+        }, 
+        {
+            "location": "/debug-reset_pw/#146-find-database-name", 
+            "text": "# source mailcow.conf\n# docker-compose exec mysql-mailcow mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME } \nMariaDB [(none)]  show databases;\n+--------------------+\n| Database           |\n+--------------------+\n| information_schema |\n| mailcow_database   |  =====\n| mysql              |\n| performance_schema |\n+--------------------+\n4 rows in set (0.00 sec)", 
+            "title": "1. Find database name"
+        }, 
+        {
+            "location": "/debug-reset_pw/#246-reset-one-or-more-users", 
+            "text": "Both \"password\" and \"authentication_string\" exist. Currently \"password\" is used, but better set both.  MariaDB [(none)]  SELECT user FROM mysql.user;\n+--------------+\n| user         |\n+--------------+\n| mailcow_user |  =====\n| root         |\n+--------------+\n2 rows in set (0.00 sec)\n\nMariaDB [(none)]  FLUSH PRIVILEGES;\nMariaDB [(none)]  UPDATE mysql.user SET authentication_string = PASSWORD( gotr00t ), password = PASSWORD( gotr00t ) WHERE User =  root  AND Host =  % ;\nMariaDB [(none)]  UPDATE mysql.user SET authentication_string = PASSWORD( mookuh ), password = PASSWORD( mookuh ) WHERE User =  mailcow  AND Host =  % ;\nMariaDB [(none)]  FLUSH PRIVILEGES;", 
+            "title": "2. Reset one or more users"
+        }, 
+        {
+            "location": "/debug-reset_pw/#remove-two-factor-authentication", 
+            "text": "This works similar to resetting a MySQL password, now we do it from the host without connecting to the MySQL CLI:  source mailcow.conf\ndocker-compose exec mysql-mailcow mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }  -e  DELETE FROM tfa WHERE username= YOUR_USERNAME ;", 
+            "title": "Remove Two-Factor Authentication"
+        }, 
+        {
+            "location": "/debug-rm_volumes/", 
+            "text": "You may want to remove a set of persistent data to resolve a conflict or to start over:\n\n\ndocker volume rm mailcowdockerized_\n${\nVOLUME_NAME\n}\n\n\n\n\n\n\n\nRemove volume \nmysql-vol-1\n to remove all MySQL data.\n\n\nRemove volume \nredis-vol-1\n to remove all Redis data.\n\n\nRemove volume \nvmail-vol-1\n to remove all contents of \n/var/vmail\n mounted to \ndovecot-mailcow\n.\n\n\nRemove volume \ndkim-vol-1\n to remove all DKIM keys.\n\n\nRemove volume \nrspamd-vol-1\n to remove all Rspamd data.\n\n\n\n\nRunning \ndocker-compose down -v\n will \ndestroy all mailcow: dockerized volumes\n and delete any related containers and networks.", 
+            "title": "Remove Persistent Data"
+        }, 
+        {
+            "location": "/debug-common_problems/", 
+            "text": "Here we list common problems and possible solutions:\n\n\nMail loops back to myself\n\n\nPlease check in your mailcow UI if you made the domain a \nbackup MX\n:\n\n\n\n\nI can receive but not send mails\n\n\nThere are a lot of things that could prevent you from sending mail:\n\n\n\n\nCheck if your IP is on any blacklists. You could use \ndnsbl.info\n or any other similar service to check for your IP.\n\n\nThere are some consumer ISP routers out there, that block mail ports for non whitelisted domains. Please check if you can reach your server on the ports \n465\n or \n587\n:\n\n\n\n\n# telnet 74.125.133.27 465\nTrying 74.125.133.27...\nConnected to 74.125.133.27.\nEscape character is \n^]\n.\n\n\n\n\nMy mails are identified as Spam\n\n\nPlease read our guide on \nDNS configuration\n.\n\n\ndocker-compose throws weird errors\n\n\n... like:\n\n\n\n\nERROR: Invalid interpolation format ...\n\n\nAttributeError: 'NoneType' object has no attribute 'keys'\n.\n\n\nERROR: In file './docker-compose.yml' service 'version' doesn't have any configuration options\n.\n\n\n\n\nWhen you encounter one or similar messages while trying to run mailcow: dockerized please check if you have the \nlatest\n version of \nDocker\n and \ndocker-compose\n\n\nContainer XY is unhealthy\n\n\nThis error tries to tell you that one of the (health) conditions for a certain container are not met. Therefore it can't be started. This can have several reasons, the most common one is an updated git clone but old docker image or vice versa.\n\n\nA wrong configured firewall could also cause such a failure. The containers need to be able to talk to each other over the network 172.22.1.1/24.\n\n\nIt might also be wrongly linked file (i.e. SSL certificate) that prevents a crucial container (nginx) from starting, so always check your logs to get an Idea where your problem is coming from.\n\n\nAddress already in use\n\n\nIf you get an error message like:\n\n\nERROR\n:\n \nfor\n \npostfix\n-\nmailcow\n  \nCannot\n \nstart\n \nservice\n \npostfix\n-\nmailcow\n:\n \ndriver\n \nfailed\n \nprogramming\n \nexternal\n     \nconnectivity\n \non\n \nendpoint\n \nmailcowdockerized_postfix\n-\nmailcow_1\n:\n \nError\n \nstarting\n \nuserland\n \nproxy\n:\n \nlisten\n \ntcp\n \n0.0\n.\n0.0\n:\n25\n:\n \nbind\n:\n \naddress\n \nalready\n \nin\n \nuse\n\n\n\n\n\nwhile trying to start / install mailcow: dockerized, make sure you've followed our section on the \nprerequisites\n.\n\n\nXYZ can't connect to ...\n\n\nPlease check your local firewall!\nDocker and iptables-based firewalls sometimes create conflicting rules, so disable the firewall on your host to determine whether your connection issues are caused by such conflicts. If they are, you need to manually create appropriate rules in your host firewall to permit the necessary connections.\n\n\nIf you experience connection problems from home, please check your ISP router's firewall too, some of them block mail traffic on the \nSMTP\n (587) or \nSMTPS\n (465) ports. It could also be, that your ISP is blocking the ports for \nSUBMISSION\n (25).\n\n\nWhile Linux users can chose from a variety of tools\n1\n to check if a port is open, the Windows user has only the command \ntelnet host port\n available by default (and it has to be activated since Windows Vista).\n\n\nTo enable telnet on a Windows after Vista please check this \nguide\n or enter the following command in an terminal \nwith administrator priviliges\n:\n\n\ndism /online /Enable-Feature /FeatureName:TelnetClient\n\n\n\n\nInotify instance limit for user 5000 (UID vmail) exceeded (\nsee #453\n)\n\n\nDocker containers use the Docker hosts inotify limits. Setting them on your Docker host will pass them to the container.\n\n\n\n\n\n\n\n\n\n\nnetcat\n, \nnmap\n, \nopenssl\n, \ntelnet\n, etc.", 
+            "title": "Common Problems"
+        }, 
+        {
+            "location": "/debug-common_problems/#mail-loops-back-to-myself", 
+            "text": "Please check in your mailcow UI if you made the domain a  backup MX :", 
+            "title": "Mail loops back to myself"
+        }, 
+        {
+            "location": "/debug-common_problems/#i-can-receive-but-not-send-mails", 
+            "text": "There are a lot of things that could prevent you from sending mail:   Check if your IP is on any blacklists. You could use  dnsbl.info  or any other similar service to check for your IP.  There are some consumer ISP routers out there, that block mail ports for non whitelisted domains. Please check if you can reach your server on the ports  465  or  587 :   # telnet 74.125.133.27 465\nTrying 74.125.133.27...\nConnected to 74.125.133.27.\nEscape character is  ^] .", 
+            "title": "I can receive but not send mails"
+        }, 
+        {
+            "location": "/debug-common_problems/#my-mails-are-identified-as-spam", 
+            "text": "Please read our guide on  DNS configuration .", 
+            "title": "My mails are identified as Spam"
+        }, 
+        {
+            "location": "/debug-common_problems/#docker-compose-throws-weird-errors", 
+            "text": "... like:   ERROR: Invalid interpolation format ...  AttributeError: 'NoneType' object has no attribute 'keys' .  ERROR: In file './docker-compose.yml' service 'version' doesn't have any configuration options .   When you encounter one or similar messages while trying to run mailcow: dockerized please check if you have the  latest  version of  Docker  and  docker-compose", 
+            "title": "docker-compose throws weird errors"
+        }, 
+        {
+            "location": "/debug-common_problems/#container-xy-is-unhealthy", 
+            "text": "This error tries to tell you that one of the (health) conditions for a certain container are not met. Therefore it can't be started. This can have several reasons, the most common one is an updated git clone but old docker image or vice versa.  A wrong configured firewall could also cause such a failure. The containers need to be able to talk to each other over the network 172.22.1.1/24.  It might also be wrongly linked file (i.e. SSL certificate) that prevents a crucial container (nginx) from starting, so always check your logs to get an Idea where your problem is coming from.", 
+            "title": "Container XY is unhealthy"
+        }, 
+        {
+            "location": "/debug-common_problems/#address-already-in-use", 
+            "text": "If you get an error message like:  ERROR :   for   postfix - mailcow    Cannot   start   service   postfix - mailcow :   driver   failed   programming   external       connectivity   on   endpoint   mailcowdockerized_postfix - mailcow_1 :   Error   starting   userland   proxy :   listen   tcp   0.0 . 0.0 : 25 :   bind :   address   already   in   use   while trying to start / install mailcow: dockerized, make sure you've followed our section on the  prerequisites .", 
+            "title": "Address already in use"
+        }, 
+        {
+            "location": "/debug-common_problems/#xyz-cant-connect-to", 
+            "text": "Please check your local firewall!\nDocker and iptables-based firewalls sometimes create conflicting rules, so disable the firewall on your host to determine whether your connection issues are caused by such conflicts. If they are, you need to manually create appropriate rules in your host firewall to permit the necessary connections.  If you experience connection problems from home, please check your ISP router's firewall too, some of them block mail traffic on the  SMTP  (587) or  SMTPS  (465) ports. It could also be, that your ISP is blocking the ports for  SUBMISSION  (25).  While Linux users can chose from a variety of tools 1  to check if a port is open, the Windows user has only the command  telnet host port  available by default (and it has to be activated since Windows Vista).  To enable telnet on a Windows after Vista please check this  guide  or enter the following command in an terminal  with administrator priviliges :  dism /online /Enable-Feature /FeatureName:TelnetClient", 
+            "title": "XYZ can't connect to ..."
+        }, 
+        {
+            "location": "/debug-common_problems/#inotify-instance-limit-for-user-5000-uid-vmail-exceeded-see-453", 
+            "text": "Docker containers use the Docker hosts inotify limits. Setting them on your Docker host will pass them to the container.      netcat ,  nmap ,  openssl ,  telnet , etc.", 
+            "title": "Inotify instance limit for user 5000 (UID vmail) exceeded (see #453)"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-config/", 
+            "text": "Several configuration parameters of the mailcow UI can be changed by creating a file \ndata/web/inc/vars.local.inc.php\n which overrides defaults settings found in \ndata/web/inc/vars.inc.php\n.\n\n\nThe local configuration file is persistent over updates of mailcow. Try not to change values inside \ndata/web/inc/vars.inc.php\n, but use them as template for the local override.\n\n\nmailcow UI configuration parameters can be to...\n\n\n\n\n...change the default language\n1\n\n\n...change the default bootstrap theme\n\n\n...set a password complexity regex\n\n\n...add mailcow app buttons to the login screen\n\n\n...set a pagination trigger\n\n\n...set action after submitting forms (stay in form, return to previous page)\n\n\n\n\n\n\n\n\n\n\n\n\nTo change SOGos default language, you will need to edit \ndata/conf/sogo/sogo.conf\n and replace \"English\" by your preferred language.", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-bl_wl/", 
+            "text": "To add or edit an entry to your \ndomain wide\n filter table, login to your \nmailcow UI\n as (domain) administrator.\n\n\n\n\n\n\nInfo\n\n\nBe aware that a user \nmay override\n this setting by setting his own black- and whitelist!", 
+            "title": "Blacklist / Whitelist"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-spamfilter/", 
+            "text": "A mailbox user may adjust the spam filter and black- / whitelist settings for his mailbox individually by navigating to the \nSpam filter\n tab in the users mailcow UI.\n\n\n\n\n\n\nInfo\n\n\nFor global adjustments on your spam filter please check our section on \nRspamd\n.\n\n\nFor a domain wide black- and whitelist please check our guide on \nBlack / Whitelist", 
+            "title": "Spamfilter"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-spamalias/", 
+            "text": "These temporary email aliases are mostly used for places where we need to provide an email address but don't want future correspondence with. They are also called spam alias.\n\n\nTo create, delete or extend a temporary email aliases you need to login to mailcow's UI as a mailbox user and navigate to the tab \nTemporary email aliases\n:", 
+            "title": "Temporary email aliase"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tagging/", 
+            "text": "Mailbox users can tag their mail address like in \nme+facebook@example.org\n. They can control the tag handling in the users \nmailcow UI\n panel.\n\n\n\n\nAvailable Actions\n\n\n1. Move this message to a sub folder \"facebook\" (will be created lower case if not existing)\n\n\n2. Prepend the tag to the subject: \"[facebook] Subject\"", 
+            "title": "Tagging"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tagging/#available-actions", 
+            "text": "1. Move this message to a sub folder \"facebook\" (will be created lower case if not existing)  2. Prepend the tag to the subject: \"[facebook] Subject\"", 
+            "title": "Available Actions"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tfa/", 
+            "text": "So far three methods for \nTwo-Factor Authentication\n are implemented: U2F, Yubi OTP, and TOTP\n\n\n\n\nFor U2F to work, you need an encrypted connection to the server (HTTPS) as well as a FIDO security key.\n\n\nBoth U2F and Yubi OTP work well with the fantastic \nYubikey\n.\n\n\nWhile Yubi OTP needs an active internet connection and an API ID + key, U2F will work with any FIDO U2F USB key out of the box, but can only be used when mailcow is accessed over HTTPS.\n\n\nU2F and Yubi OTP support multiple keys per user.\n\n\nAs the third TFA method mailcow uses TOTP: time-based one-time passwords. Those passwords can be generated with apps like \"Google Authenticator\" after initially scanning a QR code or entering the given secret manually.\n\n\n\n\nAs administrator you are able to temporary disable a domain administrators TFA login until they successfully logged in.\n\n\nThe key used to login will be displayed in green, while other keys remain grey.\n\n\nYubi OTP\n\n\nThe Yubi API ID and Key will be checked against the Yubico Cloud API. When setting up TFA you will be asked for your personal API account for this key.\nThe API ID, API key and the first 12 characters (your YubiKeys ID in modhex) are stored in the MySQL table as secret.\n\n\nU2F\n\n\nOnly Google Chrome (+derivatives) and Opera support U2F authentication to this day natively.\nFor Firefox you will need to install the \"U2F Support Add-on\" as provided on \nmozilla.org\n.\n\n\nU2F works without an internet connection.\n\n\nTOTP\n\n\nThe best known TFA method mostly used with a smartphone.", 
+            "title": "Two-Factor Authentication"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tfa/#yubi-otp", 
+            "text": "The Yubi API ID and Key will be checked against the Yubico Cloud API. When setting up TFA you will be asked for your personal API account for this key.\nThe API ID, API key and the first 12 characters (your YubiKeys ID in modhex) are stored in the MySQL table as secret.", 
+            "title": "Yubi OTP"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tfa/#u2f", 
+            "text": "Only Google Chrome (+derivatives) and Opera support U2F authentication to this day natively.\nFor Firefox you will need to install the \"U2F Support Add-on\" as provided on  mozilla.org .  U2F works without an internet connection.", 
+            "title": "U2F"
+        }, 
+        {
+            "location": "/u_e-mailcow_ui-tfa/#totp", 
+            "text": "The best known TFA method mostly used with a smartphone.", 
+            "title": "TOTP"
+        }, 
+        {
+            "location": "/u_e-postfix-anonym_headers/", 
+            "text": "To disguise your users details like IP, email client, etc. we have to create a new file in \ndata/conf/postfix/mailcow_anonymize_headers.pcre\n and insert the following:\n\n\n/^\\s*Received:[^\\)]+\\)\\s+\\(Authenticated sender:(.+)/\n    REPLACE Received: from localhost (localhost [127.0.0.1]) (Authenticated sender:$1\n/^\\s*User-Agent/        IGNORE\n/^\\s*X-Enigmail/        IGNORE\n/^\\s*X-Mailer/          IGNORE\n/^\\s*X-Originating-IP/  IGNORE\n/^\\s*X-Forward/         IGNORE\n\n\n\n\nNext we need to add the following to \ndata/conf/postfix/main.cf\n:\n\n\nsmtp_header_checks = pcre:/opt/postfix/conf/mailcow_anonymize_headers.pcre", 
+            "title": "Anonymize Headers"
+        }, 
+        {
+            "location": "/u_e-postfix-disable_sender_verification/", 
+            "text": "This option is not best-practice and should only be implemented when there is no other option available to achieve whatever you are trying to do.\n\n\nSimply create a file \ndata/conf/postfix/check_sasl_access\n and enter the following content. This user must exist in your installation and needs to authenticate before sending mail.\n\nuser-to-allow-everything@example.com OK\n\n\n\nOpen \ndata/conf/postfix/main.cf\n and find \nsmtpd_sender_restrictions\n. Prepend \ncheck_sasl_access hash:/opt/postfix/conf/check_sasl_access\n like this:\n\nsmtpd_sender_restrictions = check_sasl_access hash:/opt/postfix/conf/check_sasl_access reject_authenticated_sender_login_mismatch [...]\n\n\n\nRun postmap on check_sasl_access:\n\n\ndocker-compose exec postfix-mailcow postmap /opt/postfix/conf/check_sasl_access\n\n\n\n\nRestart the Postfix container.", 
+            "title": "Disable Sender Addresses Verification"
+        }, 
+        {
+            "location": "/u_e-postfix-attachment_size/", 
+            "text": "Open \ndata/conf/postfix/main.cf\n and set the \nmessage_size_limit\n accordingly in bytes.", 
+            "title": "Max. message size (attachment size)"
+        }, 
+        {
+            "location": "/u_e-dovecot-expunge/", 
+            "text": "If you want to delete old mails out of the \n.Junk\n or \n.Trash\n folders or maybe delete all read mails that are older than a certain amount of time you may use dovecot's tool doveadm \nman doveadm-expunge\n.\n\n\nThe manual way\n\n\nThat said, let's dive in:\n\n\nDelete a user's mails inside the junk folder that \nare read\n and \nolder\n than 4 hours\n\n\ndocker-compose exec dovecot-mailcow doveadm expunge -u \nmailbox@example.com\n mailbox \nJunk\n SEEN not SINCE 4h\n\n\n\n\nDelete \nall\n user's mails in the junk folder that are \nolder\n than 7 days\n\n\ndocker-compose exec dovecot-mailcow doveadm expunge -A mailbox \nJunk\n savedbefore 7d\n\n\n\n\nDelete mails inside a custom folder \ninside\n a user's inbox that are \nnot\n flagged and \nolder\n than 2 weeks\n\n\ndocker-compose exec dovecot-mailcow doveadm expunge -u \nmailbox@example.com\n mailbox \nINBOX/custom-folder\n not FLAGGED not SINCE 2w\n\n\n\n\n\n\nInfo\n\n\nFor possible \ntime spans\n or \nsearch keys\n have a look at \nman doveadm-search-query\n\n\n\n\nMake it automatic\n\n\nIf you want to automate such a task you can create a cron job on your host that calls a script like the one below:\n\n\n#!/bin/bash\n\n/usr/local/bin/docker-compose \nexec\n dovecot-mailcow doveadm expunge -A mailbox \nJunk\n savedbefore 2w\n/usr/local/bin/docker-compose \nexec\n dovecot-mailcow doveadm expunge -A mailbox \nJunk\n SEEN not SINCE 12h\n\n[\n...\n]\n\n\n\n\n\nTo create a cron job you may execute \ncrontab -e\n and insert something like the following to execute a script:\n\n\n# Execute everyday at 04:00 A.M.\n0 4 * * * /path/to/your/expunge_mailboxes.sh", 
+            "title": "Expunge a User's Mails"
+        }, 
+        {
+            "location": "/u_e-dovecot-expunge/#the-manual-way", 
+            "text": "That said, let's dive in:  Delete a user's mails inside the junk folder that  are read  and  older  than 4 hours  docker-compose exec dovecot-mailcow doveadm expunge -u  mailbox@example.com  mailbox  Junk  SEEN not SINCE 4h  Delete  all  user's mails in the junk folder that are  older  than 7 days  docker-compose exec dovecot-mailcow doveadm expunge -A mailbox  Junk  savedbefore 7d  Delete mails inside a custom folder  inside  a user's inbox that are  not  flagged and  older  than 2 weeks  docker-compose exec dovecot-mailcow doveadm expunge -u  mailbox@example.com  mailbox  INBOX/custom-folder  not FLAGGED not SINCE 2w   Info  For possible  time spans  or  search keys  have a look at  man doveadm-search-query", 
+            "title": "The manual way"
+        }, 
+        {
+            "location": "/u_e-dovecot-expunge/#make-it-automatic", 
+            "text": "If you want to automate such a task you can create a cron job on your host that calls a script like the one below:  #!/bin/bash \n/usr/local/bin/docker-compose  exec  dovecot-mailcow doveadm expunge -A mailbox  Junk  savedbefore 2w\n/usr/local/bin/docker-compose  exec  dovecot-mailcow doveadm expunge -A mailbox  Junk  SEEN not SINCE 12h [ ... ]   To create a cron job you may execute  crontab -e  and insert something like the following to execute a script:  # Execute everyday at 04:00 A.M.\n0 4 * * * /path/to/your/expunge_mailboxes.sh", 
+            "title": "Make it automatic"
+        }, 
+        {
+            "location": "/u_e-dovecot-more/", 
+            "text": "Here is just an unsorted list of useful \ndoveadm\n commands that could be useful.\n\n\ndoveadm quota\n\n\nThe \nquota get\n and \nquota recalc\n1\n commands are used to display or recalculate the current user's quota usage. The reported values are in \nkilobytes\n.\n\n\nTo list the current quota status for a user / mailbox, do:\n\n\ndoveadm quota get -u \nmailbox@example.org\n\n\n\n\n\nTo list the quota storage value for \nall\n users, do:\n\n\ndoveadm quota get -A |grep \nSTORAGE\n\n\n\n\n\nRecalculate a single user's quota usage:\n\n\ndoveadm quota recalc -u \nmailbox@example.org\n\n\n\n\n\ndoveadm search\n\n\nThe \ndoveadm search\n2\n command is used to find messages matching your query. It can return the username, mailbox-GUID / -UID and message-GUIDs / -UIDs.\n\n\nTo view the number of messages, by user, in their \n.Trash\n folder:\n\n\ndoveadm search -A mailbox \nTrash\n | awk \n{print $1}\n | sort | uniq -c\n\n\n\n\nShow all messages in a user's \ninbox\n older then 90 days:\n\n\ndoveadm search -u \nmailbox@example.org\n mailbox \nINBOX\n savedbefore 90d\n\n\n\n\nShow \nall messages\n in \nany folder\n that are \nolder\n then 30 days for \nmailbox@example.org\n:\n\n\ndoveadm search -u \nmailbox@example.org\n mailbox \n*\n savedbefore 30d\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://wiki.dovecot.org/Tools/Doveadm/Quota\n\n\n\n\n\n\nhttps://wiki.dovecot.org/Tools/Doveadm/Search", 
+            "title": "More Examples with DOVEADM"
+        }, 
+        {
+            "location": "/u_e-dovecot-more/#doveadm-quota", 
+            "text": "The  quota get  and  quota recalc 1  commands are used to display or recalculate the current user's quota usage. The reported values are in  kilobytes .  To list the current quota status for a user / mailbox, do:  doveadm quota get -u  mailbox@example.org   To list the quota storage value for  all  users, do:  doveadm quota get -A |grep  STORAGE   Recalculate a single user's quota usage:  doveadm quota recalc -u  mailbox@example.org", 
+            "title": "doveadm quota"
+        }, 
+        {
+            "location": "/u_e-dovecot-more/#doveadm-search", 
+            "text": "The  doveadm search 2  command is used to find messages matching your query. It can return the username, mailbox-GUID / -UID and message-GUIDs / -UIDs.  To view the number of messages, by user, in their  .Trash  folder:  doveadm search -A mailbox  Trash  | awk  {print $1}  | sort | uniq -c  Show all messages in a user's  inbox  older then 90 days:  doveadm search -u  mailbox@example.org  mailbox  INBOX  savedbefore 90d  Show  all messages  in  any folder  that are  older  then 30 days for  mailbox@example.org :  doveadm search -u  mailbox@example.org  mailbox  *  savedbefore 30d      https://wiki.dovecot.org/Tools/Doveadm/Quota    https://wiki.dovecot.org/Tools/Doveadm/Search", 
+            "title": "doveadm search"
+        }, 
+        {
+            "location": "/u_e-redis/", 
+            "text": "Redis is used as a key-value store for rspamd's and (some of) mailcow's settings and data. If you are unfamiliar with redis please read the \nintroduction to redis\n and maybe visit this \nwonderfull guide\n on how to use it.\n\n\nClient\n\n\nTo connect to the redis cli execute:\n\n\ndocker-compose exec redis-mailcow redis-cli\n\n\n\n\nDebugging\n\n\nHere are some usefull commands for the redis-cli for debugging:\n\n\nMONITOR\n\n\nListens for all requests received by the server in real time:\n\n\n# docker-compose exec redis-mailcow redis-cli\n127.0.0.1:6379\n monitor\nOK\n1494077286.401963 [0 172.22.1.253:41228] \nSMEMBERS\n \nBAYES_SPAM_keys\n\n1494077288.292970 [0 172.22.1.253:41229] \nSMEMBERS\n \nBAYES_SPAM_keys\n\n[...]\n\n\n\n\nKEYS\n\n\nGet all keys matching your pattern:\n\n\nKEYS *\n\n\n\n\nPING\n\n\nTest a connection:\n\n\n127.0.0.1:6379\n PING\nPONG\n\n\n\n\nIf you want to know more, here is a \ncheat sheet\n.", 
+            "title": "Redis"
+        }, 
+        {
+            "location": "/u_e-redis/#client", 
+            "text": "To connect to the redis cli execute:  docker-compose exec redis-mailcow redis-cli", 
+            "title": "Client"
+        }, 
+        {
+            "location": "/u_e-redis/#debugging", 
+            "text": "Here are some usefull commands for the redis-cli for debugging:", 
+            "title": "Debugging"
+        }, 
+        {
+            "location": "/u_e-redis/#monitor", 
+            "text": "Listens for all requests received by the server in real time:  # docker-compose exec redis-mailcow redis-cli\n127.0.0.1:6379  monitor\nOK\n1494077286.401963 [0 172.22.1.253:41228]  SMEMBERS   BAYES_SPAM_keys \n1494077288.292970 [0 172.22.1.253:41229]  SMEMBERS   BAYES_SPAM_keys \n[...]", 
+            "title": "MONITOR"
+        }, 
+        {
+            "location": "/u_e-redis/#keys", 
+            "text": "Get all keys matching your pattern:  KEYS *", 
+            "title": "KEYS"
+        }, 
+        {
+            "location": "/u_e-redis/#ping", 
+            "text": "Test a connection:  127.0.0.1:6379  PING\nPONG  If you want to know more, here is a  cheat sheet .", 
+            "title": "PING"
+        }, 
+        {
+            "location": "/u_e-rspamd/", 
+            "text": "Rspamd is used for AV handling, DKIM signing and SPAM handling. It's a powerful and fast filter system. For a more in-depth documentation on Rspamd please visit it's \nown documentation\n.\n\n\nLearn Spam \n Ham\n\n\nRspamd learns mail as spam or ham when you move a message in or out of the junk folder to any mailbox besides trash.\nThis is archived by using the Dovecot plugin \"antispam\" and a simple parser script.\n\n\nRspamd also auto-learns mail when a high or low score is detected (see \nhttps://rspamd.com/doc/configuration/statistic.html#autolearning\n)\n\n\nThe bayes statistics are written to Redis as keys \nBAYES_HAM\n and \nBAYES_SPAM\n.\n\n\nYou can also use Rspamd's web UI to learn ham and / or spam or to adjust certain settings of Rspamd.\n\n\nLearn Spam or Ham from existing directory\n\n\nYou can use a one-liner to learn mail in plain-text (uncompressed) format:\n\n# Ham\nfor file in /my/folder/cur/*; do docker exec -i $(docker-compose ps -q rspamd-mailcow) rspamc learn_ham \n $file; done\n# Spam\nfor file in /my/folder/.Junk/cur/*; do docker exec -i $(docker-compose ps -q rspamd-mailcow) rspamc learn_spam \n $file; done\n\n\n\nConsider attaching a local folder as new volume to \nrspamd-mailcow\n in \ndocker-compose.yml\n and learn given files inside the container. This can be used as workaround to parse compressed data with zcat. Example:\n\n\nfor file in /data/old_mail/.Junk/cur/*; do rspamc learn_spam \n zcat $file; done\n\n\n\n\nCLI tools\n\n\ndocker-compose exec rspamd-mailcow rspamc --help\ndocker-compose exec rspamd-mailcow rspamadm --help\n\n\n\n\nSee \nRspamd documentation", 
+            "title": "Rspamd"
+        }, 
+        {
+            "location": "/u_e-rspamd/#learn-spam-ham", 
+            "text": "Rspamd learns mail as spam or ham when you move a message in or out of the junk folder to any mailbox besides trash.\nThis is archived by using the Dovecot plugin \"antispam\" and a simple parser script.  Rspamd also auto-learns mail when a high or low score is detected (see  https://rspamd.com/doc/configuration/statistic.html#autolearning )  The bayes statistics are written to Redis as keys  BAYES_HAM  and  BAYES_SPAM .  You can also use Rspamd's web UI to learn ham and / or spam or to adjust certain settings of Rspamd.", 
+            "title": "Learn Spam &amp; Ham"
+        }, 
+        {
+            "location": "/u_e-rspamd/#learn-spam-or-ham-from-existing-directory", 
+            "text": "You can use a one-liner to learn mail in plain-text (uncompressed) format: # Ham\nfor file in /my/folder/cur/*; do docker exec -i $(docker-compose ps -q rspamd-mailcow) rspamc learn_ham   $file; done\n# Spam\nfor file in /my/folder/.Junk/cur/*; do docker exec -i $(docker-compose ps -q rspamd-mailcow) rspamc learn_spam   $file; done  Consider attaching a local folder as new volume to  rspamd-mailcow  in  docker-compose.yml  and learn given files inside the container. This can be used as workaround to parse compressed data with zcat. Example:  for file in /data/old_mail/.Junk/cur/*; do rspamc learn_spam   zcat $file; done", 
+            "title": "Learn Spam or Ham from existing directory"
+        }, 
+        {
+            "location": "/u_e-rspamd/#cli-tools", 
+            "text": "docker-compose exec rspamd-mailcow rspamc --help\ndocker-compose exec rspamd-mailcow rspamadm --help  See  Rspamd documentation", 
+            "title": "CLI tools"
+        }, 
+        {
+            "location": "/u_e-docker-cust_dockerfiles/", 
+            "text": "Make your changes in \ndata/Dockerfiles/$service\n and build the image locally:\n\n\ndocker build data/Dockerfiles/service -t mailcow/$service\n\n\n\n\nNow auto-recreate modified containers:\n\n\ndocker-compose up -d", 
+            "title": "Customize Dockerfiles"
+        }, 
+        {
+            "location": "/u_e-docker-dc_bash_compl/", 
+            "text": "To get some sexy bash completion inside your containers simply execute the following:\n\n\ncurl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose", 
+            "title": "Docker Compose Bash Completion"
+        }, 
+        {
+            "location": "/u_e-why_unbound/", 
+            "text": "For DNS blacklist lookups and DNSSEC.\n\n\nMost systems use either a public or a local caching DNS resolver.\nThat's a very bad idea when it comes to filter spam using DNS-based black hole lists (DNSBL) or similar technics.\nMost if not all providers apply a rate limit based on the DNS resolver that is used to query their service.\nUsing a public resolver like Googles 4x8, OpenDNS or any other shared DNS resolver like your ISPs will hit that limit very soon.", 
+            "title": "Why unbound?"
+        }, 
+        {
+            "location": "/u_e-backup_restore-maildir/", 
+            "text": "Backup\n\n\nThis line backups the vmail directory to a file backup_vmail.tar.gz in the mailcow root directory:\n\ncd /path/to/mailcow-dockerized\ndocker run --rm -i -v $(docker inspect --format \n{{ range .Mounts }}{{ if eq .Destination \n/var/vmail\n }}{{ .Name }}{{ end }}{{ end }}\n $(docker-compose ps -q dovecot-mailcow)):/vmail -v \n${\nPWD\n}\n:/backup debian:stretch-slim tar cvfz /backup/backup_vmail.tar.gz /vmail\n\n\n\nYou can change the path by adjusting ${PWD} (which equals to the current directory) to any path you have write-access to.\nSet the filename \nbackup_vmail.tar.gz\n to any custom name, but leave the path as it is. Example: \n[...] tar cvfz /backup/my_own_filename_.tar.gz\n\n\nRestore\n\n\ncd /path/to/mailcow-dockerized\ndocker run --rm -it -v $(docker inspect --format \n{{ range .Mounts }}{{ if eq .Destination \n/var/vmail\n }}{{ .Name }}{{ end }}{{ end }}\n $(docker-compose ps -q dovecot-mailcow)):/vmail -v \n${\nPWD\n}\n:/backup debian:stretch-slim tar xvfz /backup/backup_vmail.tar.gz", 
+            "title": "Backup Maildir"
+        }, 
+        {
+            "location": "/u_e-backup_restore-maildir/#backup", 
+            "text": "This line backups the vmail directory to a file backup_vmail.tar.gz in the mailcow root directory: cd /path/to/mailcow-dockerized\ndocker run --rm -i -v $(docker inspect --format  {{ range .Mounts }}{{ if eq .Destination  /var/vmail  }}{{ .Name }}{{ end }}{{ end }}  $(docker-compose ps -q dovecot-mailcow)):/vmail -v  ${ PWD } :/backup debian:stretch-slim tar cvfz /backup/backup_vmail.tar.gz /vmail  You can change the path by adjusting ${PWD} (which equals to the current directory) to any path you have write-access to.\nSet the filename  backup_vmail.tar.gz  to any custom name, but leave the path as it is. Example:  [...] tar cvfz /backup/my_own_filename_.tar.gz", 
+            "title": "Backup"
+        }, 
+        {
+            "location": "/u_e-backup_restore-maildir/#restore", 
+            "text": "cd /path/to/mailcow-dockerized\ndocker run --rm -it -v $(docker inspect --format  {{ range .Mounts }}{{ if eq .Destination  /var/vmail  }}{{ .Name }}{{ end }}{{ end }}  $(docker-compose ps -q dovecot-mailcow)):/vmail -v  ${ PWD } :/backup debian:stretch-slim tar xvfz /backup/backup_vmail.tar.gz", 
+            "title": "Restore"
+        }, 
+        {
+            "location": "/u_e-backup_restore-mysql/", 
+            "text": "Backup\n\n\ncd /path/to/mailcow-dockerized\nsource mailcow.conf\nDATE=$(date +\n%Y%m%d_%H%M%S\n)\ndocker-compose exec -T mysql-mailcow mysqldump --default-character-set=utf8mb4 -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n \n backup_\n${\nDBNAME\n}\n_\n${\nDATE\n}\n.sql\n\n\n\n\nRestore\n\n\n\n\nWarning\n\n\nYou should redirect the SQL dump without \ndocker-compose\n to prevent parsing errors.\n\n\n\n\ncd /path/to/mailcow-dockerized\nsource mailcow.conf\ndocker exec -i $(docker-compose ps -q mysql-mailcow) mysql -u\n${\nDBUSER\n}\n -p\n${\nDBPASS\n}\n \n${\nDBNAME\n}\n \n backup\n_file.sql", 
+            "title": "MySQL"
+        }, 
+        {
+            "location": "/u_e-backup_restore-mysql/#backup", 
+            "text": "cd /path/to/mailcow-dockerized\nsource mailcow.conf\nDATE=$(date + %Y%m%d_%H%M%S )\ndocker-compose exec -T mysql-mailcow mysqldump --default-character-set=utf8mb4 -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }    backup_ ${ DBNAME } _ ${ DATE } .sql", 
+            "title": "Backup"
+        }, 
+        {
+            "location": "/u_e-backup_restore-mysql/#restore", 
+            "text": "Warning  You should redirect the SQL dump without  docker-compose  to prevent parsing errors.   cd /path/to/mailcow-dockerized\nsource mailcow.conf\ndocker exec -i $(docker-compose ps -q mysql-mailcow) mysql -u ${ DBUSER }  -p ${ DBPASS }   ${ DBNAME }    backup _file.sql", 
+            "title": "Restore"
+        }, 
+        {
+            "location": "/u_e-autodiscover_config/", 
+            "text": "Open/create \ndata/web/inc/vars.local.inc.php\n and add your changes to the configuration array.\n\n\nChanges will be merged with \"$autodiscover_config\" in \ndata/web/inc/vars.inc.php\n):\n\n\n?php\n\n\n$autodiscover_config\n \n=\n \narray\n(\n\n  \n// Enable the autodiscover service for Outlook desktop clients\n\n  \nuseEASforOutlook\n \n=\n \nyes\n,\n\n  \n// General autodiscover service type: \nactivesync\n or \nimap\n\n  \nautodiscoverType\n \n=\n \nactivesync\n,\n\n  \n// Please don\nt use STARTTLS-enabled service ports here.\n\n  \n// The autodiscover service will always point to SMTPS and IMAPS (TLS-wrapped services).\n\n  \nimap\n \n=\n \narray\n(\n\n    \nserver\n \n=\n \n$mailcow_hostname\n,\n\n    \nport\n \n=\n \ngetenv\n(\nIMAPS_PORT\n),\n\n  \n),\n\n  \nsmtp\n \n=\n \narray\n(\n\n    \nserver\n \n=\n \n$mailcow_hostname\n,\n\n    \nport\n \n=\n \ngetenv\n(\nSMTPS_PORT\n),\n\n  \n),\n\n  \nactivesync\n \n=\n \narray\n(\n\n    \nurl\n \n=\n \nhttps://\n.\n$mailcow_hostname\n.\n/Microsoft-Server-ActiveSync\n\n  \n),\n\n  \ncaldav\n \n=\n \narray\n(\n\n    \nurl\n \n=\n \nhttps://\n.\n$mailcow_hostname\n\n  \n)\n\n  \ncarddav\n \n=\n \narray\n(\n\n    \nurl\n \n=\n \nhttps://\n.\n$mailcow_hostname\n\n  \n)\n\n\n);\n\n\n\n\n\nTo always use IMAP and SMTP instead of EAS, set \n'autodiscoverType' =\n 'imap'\n.\n\n\nDisable ActiveSync for Outlook desktop clients by setting \"useEASforOutlook\" to \"no\".", 
+            "title": "Autodiscover / Autoconfig"
+        }, 
+        {
+            "location": "/u_e-80_to_443/", 
+            "text": "Since February the 28th 2017 mailcow does come with port 80 and 443 enabled.\n\n\nOpen \nmailcow.conf\n and set \nHTTP_BIND=0.0.0.0\n - if not already set.\n\n\nOpen \ndata/conf/nginx/site.conf\n and add a new site at the top of that file:\n\n\nserver\n \n{\n\n    \nlisten\n \n80\n \ndefault_server\n;\n\n    \ninclude\n \n/etc/nginx/conf.d/server_name.active\n;\n\n    \nreturn\n \n301\n \nhttps\n:\n//\n$\nhost\n$\nrequest_uri\n;\n\n\n}\n\n\n\n\n\nIn case you changed the HTTP_BIND parameter, recreate the container:\n\n\ndocker-compose up -d\n\n\n\n\nOtherwise restart Nginx:\n\n\ndocker-compose restart nginx-mailcow", 
+            "title": "Redirect HTTP to HTTPS"
+        }, 
+        {
+            "location": "/u_e-change_config/", 
+            "text": "The most important configuration files are mounted from the host into the related containers:\n\n\ndata/conf\n\u251c\u2500\u2500 unbound\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 unbound.conf\n\u251c\u2500\u2500 dovecot\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dovecot.conf\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dovecot-master.passwd\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 sieve_after\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 sql\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 dovecot-dict-sql.conf\n\u2502\u00a0\u00a0     \u2514\u2500\u2500 dovecot-mysql.conf\n\u251c\u2500\u2500 mysql\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 my.cnf\n\u251c\u2500\u2500 nginx\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dynmaps.conf\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 site.conf\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 templates\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 listen_plain.template\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 listen_ssl.template\n\u2502\u00a0\u00a0     \u2514\u2500\u2500 server_name.template\n\u251c\u2500\u2500 postfix\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 main.cf\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 master.cf\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 postscreen_access.cidr\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 smtp_dsn_filter\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 sql\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_relay_recipient_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_tls_enforce_in_policy.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_tls_enforce_out_policy.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_alias_domain_catchall_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_alias_domain_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_alias_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_domains_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_mailbox_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_relay_domain_maps.cf\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 mysql_virtual_sender_acl.cf\n\u2502\u00a0\u00a0     \u2514\u2500\u2500 mysql_virtual_spamalias_maps.cf\n\u251c\u2500\u2500 rmilter\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 rmilter.conf\n\u251c\u2500\u2500 rspamd\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 dynmaps\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 authoritative.php\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 settings.php\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 tags.php\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 vars.inc.php -\n ../../../web/inc/vars.inc.php\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 local.d\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 dkim.conf\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 metrics.conf\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 options.inc\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 redis.conf\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u251c\u2500\u2500 rspamd.conf.local\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 statistic.conf\n\u2502\u00a0\u00a0 \u251c\u2500\u2500 lua\n\u2502\u00a0\u00a0 \u2502\u00a0\u00a0 \u2514\u2500\u2500 rspamd.local.lua\n\u2502\u00a0\u00a0 \u2514\u2500\u2500 override.d\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 logging.inc\n\u2502\u00a0\u00a0     \u251c\u2500\u2500 worker-controller.inc\n\u2502\u00a0\u00a0     \u2514\u2500\u2500 worker-normal.inc\n\u2514\u2500\u2500 sogo\n    \u251c\u2500\u2500 sieve.creds\n    \u2514\u2500\u2500 sogo.conf\n\n\n\n\nJust change the according configuration file on the host and restart the related service:\n\ndocker-compose restart service-mailcow", 
+            "title": "Adjust Service Configurations"
+        }, 
+        {
+            "location": "/u_e-deinstall/", 
+            "text": "To remove mailcow: dockerized with all it's volumes, images and containers do:\n\n\ndocker-compose down -v --rmi all --remove-orphans\n\n\n\n\n\n\nInfo\n\n\n\n\n-v\n Remove named volumes declared in the \nvolumes\n section of the Compose file and anonymous volumes attached to containers.\n\n\n--rmi \n Remove images. Type must be one of: \nall\n: Remove all images used by any service. \nlocal\n: Remove only images that don't have a custom tag set by the \nimage\n field.\n\n\n--remove-orphans\n Remove containers for services not defined in the compose file.\n\n\nBy default \ndocker-compose down\n only removes currently active containers and networks defined in the \ndocker-compose.yml\n.", 
+            "title": "Deinstall"
+        }, 
+        {
+            "location": "/client/", 
+            "text": "mailcow supports a variety of email clients, both on desktop computers and on smartphones.\nBelow, you can find a number of configuration guides that explain how to configure your mailcow account.\n\n\n\n\n\n\nTip\n\nIf you access this page by logging into your mailcow server and clicking the \"Show configuration guides for email clients and smartphones\" link, all of the guides will be personalized with your email address and server name.\n\n\n\n\n\n\n\n\n\nSuccess\n\nSince you accessed this page after logging into your mailcow server, all of the guides have been personalized with your email address and server name.\n\n\n\n\n\n\n\nAndroid\n\n\nApple iOS / macOS\n\n\neM Client\n\n\nKDE Kontact / KMail\n\n\nMicrosoft Outlook\n\n\nMozilla Thunderbird\n\n\nWindows Mail\n\n\nWindows Phone", 
+            "title": "Overview"
+        }, 
+        {
+            "location": "/client-android/", 
+            "text": "Open the \nEmail\n app.\n\n\nIf this is your first email account, tap \nAdd Account\n; if not, tap \nMore\n and \nSettings\n and then \nAdd account\n.\n\n\nSelect \nMicrosoft Exchange ActiveSync\n.\n\n\nEnter your email address\n (\n)\n and password.\n\n\nTap \nSign in\n.", 
+            "title": "Android"
+        }, 
+        {
+            "location": "/client-apple/", 
+            "text": "Email, contacts and calendar can be configured automatically on Apple devices by installing a profile. It configure IMAP, CardDAV and CalDAV.\n\n\n\n\nDownload and open \nthe file from \nhttps://${MAILCOW_HOSTNAME}/mobileconfig.php\nmailcow.mobileconfig\n.\n\n\nEnter the unlock code (iPhone) or computer password (Mac).\n\n\nEnter your email password three times when prompted.\n\n\n\n\nOn iOS, Exchange ActiveSync is also supported as an alternative to the procedure above. It has the advantage of supporting push email (i.e. you are immediately notified of incoming messages), but has some limitations, e.g. it does not support more than three email addresses per contact in your address book. Follow the steps below if you decide to use Exchange instead.\n\n\n\n\nOpen the \nSettings\n app, tap \nMail\n, tap \nAccounts\n, tap \nAdd Acccount\n, select \nExchange\n.\n\n\nEnter your email address\n (\n)\n and tap \nNext\n.\n\n\nEnter your password, tap \nNext\n again.\n\n\nFinally, tap \nSave\n.", 
+            "title": "Apple macOS / iOS"
+        }, 
+        {
+            "location": "/client-emclient/", 
+            "text": "Launch eM Client.\n\n\nIf this is the first time you launched eM Client, it asks you to set up your account. Proceed to step 4.\n\n\nGo to \nMenu\n at the top, select \nTools\n and \nAccounts\n.\n\n\nEnter your email address\n (\n)\n and click \nStart Now\n.\n\n\nEnter your password and click \nContinue\n.\n\n\nEnter your name\n (\n)\n and click \nNext\n.\n\n\nClick \nFinish\n.", 
+            "title": "eM Client"
+        }, 
+        {
+            "location": "/client-kontact/", 
+            "text": "Launch Kontact.\n\n\nIf this is the first time you launched Kontact or KMail, it asks you to set up your account. Proceed to step 4.\n\n\nGo to \nMail\n in the sidebar. Go to the \nTools\n menu and select \nAccount Wizard\n.\n\n\nEnter your name\n (\n)\n, email address\n (\n)\n and your password. Click \nNext\n.\n\n\nClick \nCreate Account\n. If prompted, re-enter your password and click \nOK\n.\n\n\nClose the window by clicking \nFinish\n.\n\n\nGo to \nCalendar\n in the sidebar.\n\n\nGo to the \nSettings\n menu and select \nConfigure KOrganizer\n.\n\n\nGo to the \nCalendars\n tab and click the \nAdd\n button.\n\n\nChoose \nDAV groupware resource\n and click \nOK\n.\n\n\nEnter your email address\n (\n)\n and your password. Click \nNext\n.\n\n\nSelect \nScalableOGo\n from the dropdown menu and click \nNext\n.\n\n\nEnter\n \n your mailcow hostname\n into the \nHost\n field and click \nNext\n.\n\n\nClick \nTest Connection\n and then \nFinish\n. Finally, click \nOK\n twice.\n\n\n\n\nOnce you have set up Kontact, you can also use KMail, KOrganizer and KAddressBook individually.", 
+            "title": "KDE Kontact"
+        }, 
+        {
+            "location": "/client-outlook/", 
+            "text": "Outlook 2013 or higher on Windows\n\n\n\n\nThis is only applicable if your server administrator has not disabled EAS for Outlook. If it is disabled, please follow the guide for Outlook 2007 instead.\n\n\n\n\n\n\nLaunch Outlook.\n\n\nIf this is the first time you launched Outlook, it asks you to set up your account. Proceed to step 4.\n\n\nGo to the \nFile\n menu and click \nAdd Account\n.\n\n\nEnter your name\n (\n)\n, email address\n (\n)\n and your password. Click \nNext\n.\n\n\nWhen prompted, enter your password again, check \nRemember my credentials\n and click \nOK\n.\n\n\nClick the \nAllow\n button.\n\n\nClick \nFinish\n.\n\n\n\n\nOutlook 2007 or 2010 on Windows\n\n\n\n\n\n\nOutlook 2007 or higher on Windows\n\n\n\n\n\n\nDownload and install \nOutlook CalDav Synchronizer\n.\n\n\nLaunch Outlook.\n\n\nIf this is the first time you launched Outlook, it asks you to set up your account. Proceed to step 5.\n\n\nGo to the \nFile\n menu and click \nAdd Account\n.\n\n\nEnter your name\n (\n)\n, email address\n (\n)\n and your password. Click \nNext\n.\n\n\nClick \nFinish\n.\n\n\nGo to the \nCalDav Synchronizer\n ribbon and click \nSynchronization Profiles\n.\n\n\nClick the second button at top (\nAdd multiple profiles\n), select \nSogo\n, click \nOk\n.\n\n\nClick the \nGet IMAP/POP3 account settings\n button.\n\n\nClick \nDiscover resources and assign to Outlook folders\n.\n\n\nIn the \nSelect Resource\n window that pops up, select your main calendar (usually \nPersonal Calendar\n), click the \n...\n button, assign it to \nCalendar\n, and click \nOK\n. Go to the \nAddress Books\n and \nTasks\n tabs and repeat repeat the process accordingly. Do not assign multiple calendars, address books or task lists!\n\n\nClose all windows with the \nOK\n buttons.\n\n\n\n\nOutlook 2011 or higher on macOS\n\n\nThe Mac version of Outlook does not synchronize calendars and contacts and therefore is not supported.", 
+            "title": "Microsoft Outlook"
+        }, 
+        {
+            "location": "/client-outlook/#outlook-2013-or-higher-on-windows", 
+            "text": "This is only applicable if your server administrator has not disabled EAS for Outlook. If it is disabled, please follow the guide for Outlook 2007 instead.    Launch Outlook.  If this is the first time you launched Outlook, it asks you to set up your account. Proceed to step 4.  Go to the  File  menu and click  Add Account .  Enter your name  ( ) , email address  ( )  and your password. Click  Next .  When prompted, enter your password again, check  Remember my credentials  and click  OK .  Click the  Allow  button.  Click  Finish .", 
+            "title": "Outlook 2013 or higher on Windows"
+        }, 
+        {
+            "location": "/client-outlook/#outlook-2007-or-2010-on-windows", 
+            "text": "", 
+            "title": "Outlook 2007 or 2010 on Windows"
+        }, 
+        {
+            "location": "/client-outlook/#outlook-2007-or-higher-on-windows", 
+            "text": "Download and install  Outlook CalDav Synchronizer .  Launch Outlook.  If this is the first time you launched Outlook, it asks you to set up your account. Proceed to step 5.  Go to the  File  menu and click  Add Account .  Enter your name  ( ) , email address  ( )  and your password. Click  Next .  Click  Finish .  Go to the  CalDav Synchronizer  ribbon and click  Synchronization Profiles .  Click the second button at top ( Add multiple profiles ), select  Sogo , click  Ok .  Click the  Get IMAP/POP3 account settings  button.  Click  Discover resources and assign to Outlook folders .  In the  Select Resource  window that pops up, select your main calendar (usually  Personal Calendar ), click the  ...  button, assign it to  Calendar , and click  OK . Go to the  Address Books  and  Tasks  tabs and repeat repeat the process accordingly. Do not assign multiple calendars, address books or task lists!  Close all windows with the  OK  buttons.", 
+            "title": "Outlook 2007 or higher on Windows"
+        }, 
+        {
+            "location": "/client-outlook/#outlook-2011-or-higher-on-macos", 
+            "text": "The Mac version of Outlook does not synchronize calendars and contacts and therefore is not supported.", 
+            "title": "Outlook 2011 or higher on macOS"
+        }, 
+        {
+            "location": "/client-thunderbird/", 
+            "text": "Launch Thunderbird.\n\n\n\n\n  If this is the first time you launched Thunderbird, it asks you whether you would like a new email address. Click \nSkip this and use my existing email\n and proceed to step 4.\n\n\n\n\n  Go to the \nTools\n menu and select \nAccount Settings\n.\n\n\n\n\n  Click the \nAccount Actions\n dropdown menu at the bottom left and select \nAdd Mail Account\n.\n\n\n\n\n  Enter your name\n (\n)\n, email address\n (\n)\n and your password. Make sure the \nRemember password\n checkbox is selected and click \nContinue\n.\n\n\n\n\n  Once the configuration has been automatically detected, click \nDone\n.\n\n\n\n\n  If you already had other accounts configured in Thunderbird, select the new one\n (\n)\n on the left, click the \nAccount Actions\n dropdown and select Set as \nDefault\n.\n\n\n\n\n  Close the account settings window with the \nOK\n button.\n\n\n\n\n  In your web browser, download \nSOGo Integrator\nSOGo Integrator\n.\n\n\n\n\n  Back in Thunderbird, go to the \nTools\n menu and select \nAdd-ons\n.\n\n\n\n\n  Click \nExtensions\n on the left, click the little gear icon at the top and select \nInstall Add-on From File\n. Select the file you downloaded in step 9, click \nOpen\n and, after waiting for a few seconds, \nInstall Now\n.\n\n\n\n\n  Click the \nRestart Now\n button at the top that appears.\n\n\n\n\n  Thunderbird briefly shows a message that it is updating extensions, then restarts automatically once more.\n\n\n\n\n  When you are prompted to authenticate\n for \n, enter your email address and password, check \nUse Password Manager\n and click \nOK\n.\n\n\n\n\n\n\n\n\nAutomatic configuration of calendars and address books in Thunderbird is not currently supported.\n      You can ask your server administrator to enable \nSOGo Integrator\n if you need it.\n\n\n\n\n\n\nAutomatic configuration of calendars and address books (from step 9 onward) in Thunderbird is only supported if your server administrator has enabled \nSOGo Integrator\n.", 
+            "title": "Mozilla Thunderbird"
+        }, 
+        {
+            "location": "/client-windows/", 
+            "text": "Windows 8 and higher support email, contacts and calendar via Exchange ActiveSync.\n\n\n\n\nOpen the \nMail\n app.\n\n\nIf you have not previously used Mail, you can click \nAdd Account\n in the main window. Proceed to step 4.\n\n\nClick \nAccounts\n in the sidebar on the left, then click \nAdd Account\n on the far right.\n\n\nSelect \nExchange\n.\n\n\nEnter your email address\n (\n)\n and click \nNext\n.\n\n\nEnter your password and click \nLog in\n.\n\n\n\n\nOnce you have set up the Mail app, you can also use the People and Calendar apps.", 
+            "title": "Windows Mail"
+        }, 
+        {
+            "location": "/client-windowsphone/", 
+            "text": "Open the \nSettings\n app. Select \nemail + accounts\n and tap \nadd an account\n.\n\n\nTap \nExchange\n.\n\n\nEnter your email address\n (\n)\n and your password. Tap \nSign in\n.\n\n\nTap \ndone\n.", 
+            "title": "Windows Phone"
+        }, 
+        {
+            "location": "/third_party-roundcube/", 
+            "text": "Download Roundcube 1.3.0 (26 June 2017, Roundcube Webmail 1.3.0 released) to the web htdocs directory and extract it (here \nrc/\n):\n\ncd data/web/rc\nwget -O - https://github.com/roundcube/roundcubemail/releases/download/1.3.0/roundcubemail-1.3.0-complete.tar.gz | tar xfvz -\n# Change folder name\nmv roundcubemail-1.3.0 rc\n# Change permissions\nchown -R root: rc/\n\n\n\nCreate a file \ndata/web/rc/config/config.inc.php\n with the following content.\n\n\nChange the \ndes_key\n parameter to a random value.\n It is used to temporarily store your IMAP password.\n\n\n?php\n\n\nerror_reporting\n(\n0\n);\n\n\nif\n \n(\n!\nfile_exists\n(\n/tmp/mime.types\n))\n \n{\n\n\nfile_put_contents\n(\n/tmp/mime.types\n,\n \nfopen\n(\nhttp://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types\n,\n \nr\n));\n\n\n}\n\n\n$config\n \n=\n \narray\n();\n\n\n$config\n[\ndb_dsnw\n]\n \n=\n \nmysql://\n \n.\n \ngetenv\n(\nDBUSER\n)\n \n.\n \n:\n \n.\n \ngetenv\n(\nDBPASS\n)\n \n.\n \n@mysql/\n \n.\n \ngetenv\n(\nDBNAME\n);\n\n\n$config\n[\ndefault_host\n]\n \n=\n \ntls://dovecot\n;\n\n\n$config\n[\ndefault_port\n]\n \n=\n \n143\n;\n\n\n$config\n[\nsmtp_server\n]\n \n=\n \ntls://postfix\n;\n\n\n$config\n[\nsmtp_port\n]\n \n=\n \n587\n;\n\n\n$config\n[\nsmtp_user\n]\n \n=\n \n%u\n;\n\n\n$config\n[\nsmtp_pass\n]\n \n=\n \n%p\n;\n\n\n$config\n[\nsupport_url\n]\n \n=\n \n;\n\n\n$config\n[\nproduct_name\n]\n \n=\n \nRoundcube Webmail\n;\n\n\n$config\n[\ndes_key\n]\n \n=\n \nrcmail-!24ByteDESkey*Str\n;\n\n\n$config\n[\nlog_dir\n]\n \n=\n \n/dev/null\n;\n\n\n$config\n[\ntemp_dir\n]\n \n=\n \n/tmp\n;\n\n\n$config\n[\nplugins\n]\n \n=\n \narray\n(\n\n    \narchive\n,\n\n\n);\n\n\n$config\n[\nskin\n]\n \n=\n \nlarry\n;\n\n\n$config\n[\nmime_types\n]\n \n=\n \n/tmp/mime.types\n;\n\n\n$config\n[\nimap_conn_options\n]\n \n=\n \narray\n(\n\n\nssl\n \n=\n \narray\n(\nverify_peer\n \n=\n \nfalse\n,\n \nverify_peer_name\n \n=\n \nfalse\n,\n \nallow_self_signed\n \n=\n \ntrue\n)\n\n\n);\n\n\n$config\n[\nenable_installer\n]\n \n=\n \nfalse\n;\n\n\n$config\n[\nsmtp_conn_options\n]\n \n=\n \narray\n(\n\n\nssl\n \n=\n \narray\n(\nverify_peer\n \n=\n \nfalse\n,\n \nverify_peer_name\n \n=\n \nfalse\n,\n \nallow_self_signed\n \n=\n \ntrue\n)\n\n\n);\n\n\n\n\n\nPoint your browser to \nhttps://myserver/rc/installer\n and follow the instructions.\nInitialize the database and leave the installer.\n\n\nDelete the directory \ndata/web/rc/installer\n after a successful installation!\n\n\nEnable change password function in Roundcube\n\n\nOpen \ndata/web/rc/config/config.inc.php\n and enable the password plugin:\n\n\n...\n$config[\nplugins\n] = array(\n    \narchive\n,\n    \npassword\n,\n);\n...\n\n\n\n\nOpen \ndata/web/rc/plugins/password/password.php\n, search for \ncase 'ssha':\n and add above:\n\n\n        \ncase\n \nssha256\n:\n\n            \n$\nsalt\n \n=\n \nrcube_utils\n::\nrandom_bytes\n(\n8\n);\n\n            \n$\ncrypted\n \n=\n \nbase64_encode\n(\n \nhash\n(\nsha256\n,\n \n$\npassword\n \n.\n \n$\nsalt\n,\n \nTRUE\n \n)\n \n.\n \n$\nsalt\n \n);\n\n            \n$\nprefix\n  \n=\n \n{SSHA256}\n;\n\n            \nbreak\n;\n\n\n\n\n\nOpen \ndata/web/rc/plugins/password/config.inc.php\n and change the following parameters (or add them at the bottom of that file):\n\n\n$config[\npassword_driver\n] = \nsql\n;\n$config[\npassword_algorithm\n] = \nssha256\n;\n$config[\npassword_algorithm_prefix\n] = \n{SSHA256}\n;\n$config[\npassword_query\n] = \nUPDATE mailbox SET password = %P WHERE username = %u\n;\n\n\n\n\n\n\nOptionally, you can add Roundcube's link to the mailcow Apps list.\nTo do this, open or create \ndata/web/inc/vars.local.inc.php\n and add the following code-block:\n\n\nNOTE: Don't forget to add the \n?php\n delimiter on the first line\n\n\n...\n$MAILCOW_APPS = array(\n  array(\n    \nname\n =\n \nSOGo\n,\n    \nlink\n =\n \n/SOGo/\n\n  ),\n  array(\n    \nname\n =\n \nRoundcube\n,\n    \nlink\n =\n \n/rc/\n\n   )\n);\n...", 
+            "title": "Roundcube"
+        }, 
+        {
+            "location": "/third_party-roundcube/#enable-change-password-function-in-roundcube", 
+            "text": "Open  data/web/rc/config/config.inc.php  and enable the password plugin:  ...\n$config[ plugins ] = array(\n     archive ,\n     password ,\n);\n...  Open  data/web/rc/plugins/password/password.php , search for  case 'ssha':  and add above:           case   ssha256 : \n             $ salt   =   rcube_utils :: random_bytes ( 8 ); \n             $ crypted   =   base64_encode (   hash ( sha256 ,   $ password   .   $ salt ,   TRUE   )   .   $ salt   ); \n             $ prefix    =   {SSHA256} ; \n             break ;   Open  data/web/rc/plugins/password/config.inc.php  and change the following parameters (or add them at the bottom of that file):  $config[ password_driver ] =  sql ;\n$config[ password_algorithm ] =  ssha256 ;\n$config[ password_algorithm_prefix ] =  {SSHA256} ;\n$config[ password_query ] =  UPDATE mailbox SET password = %P WHERE username = %u ;   Optionally, you can add Roundcube's link to the mailcow Apps list.\nTo do this, open or create  data/web/inc/vars.local.inc.php  and add the following code-block:  NOTE: Don't forget to add the  ?php  delimiter on the first line  ...\n$MAILCOW_APPS = array(\n  array(\n     name  =   SOGo ,\n     link  =   /SOGo/ \n  ),\n  array(\n     name  =   Roundcube ,\n     link  =   /rc/ \n   )\n);\n...", 
+            "title": "Enable change password function in Roundcube"
+        }, 
+        {
+            "location": "/third_party-portainer/", 
+            "text": "In order to enable Portainer, the docker-compose.yml and site.conf for nginx must be modified.\n\n\n1. docker-compose.yml: Insert this block for portainer\n\n    portainer-mailcow:\n      image: portainer/portainer\n      volumes:\n        - /var/run/docker.sock:/var/run/docker.sock\n        - ./data/conf/portainer:/data\n      restart: always\n      dns:\n        - 172.22.1.254\n      dns_search: mailcow-network\n      networks:\n        mailcow-network:\n          aliases:\n            - portainer\n\n\n2a. data/conf/nginx/site.conf: Just beneath the opening line, at the same level as a server { block, add this:\n\nupstream\n \nportainer\n \n{\n\n  \nserver\n \nportainer-mailcow\n:\n9000\n;\n\n\n}\n\n\n\nmap\n \n$\nhttp_upgrade\n \n$\nconnection_upgrade\n \n{\n\n  \ndefault\n \nupgrade\n;\n\n  \n \nclose\n;\n\n\n}\n\n\n\n\n2b. data/conf/nginx/site.conf: Then, inside \nboth\n (ssl and plain) server blocks, add this:\n\n  \nlocation\n \n/\nportainer\n/\n \n{\n\n    \nproxy_http_version\n \n1.1\n;\n\n    \nproxy_set_header\n \nHost\n              \n$http_host\n;\n   \n#\n \nrequired\n \nfor\n \ndocker\n \nclient\ns\n \nsake\n\n    \nproxy_set_header\n \nX-Real-IP\n         \n$remote_addr\n;\n \n#\n \npass\n \non\n \nreal\n \nclient\ns\n \nIP\n\n    \nproxy_set_header\n \nX-Forwarded-For\n   \n$proxy_add_x_forwarded_for\n;\n\n    \nproxy_set_header\n \nX-Forwarded-Proto\n \n$scheme\n;\n\n    \nproxy_read_timeout\n                 \n900\n;\n\n\n    \nproxy_set_header\n \nConnection\n \n;\n\n    \nproxy_buffers\n \n32\n \n4k\n;\n\n    \nproxy_pass\n \nhttp\n:\n//\nportainer\n/\n;\n\n  \n}\n\n\n  \nlocation\n \n/\nportainer\n/\napi\n/\nwebsocket\n/\n \n{\n\n    \nproxy_http_version\n \n1.1\n;\n\n    \nproxy_set_header\n \nUpgrade\n \n$http_upgrade\n;\n\n    \nproxy_set_header\n \nConnection\n \n$connection_upgrade\n;\n\n    \nproxy_pass\n \nhttp\n:\n//\nportainer\n/\napi\n/\nwebsocket\n/\n;\n\n  \n}\n\n\n\n\nNow you can simply navigate to https://${MAILCOW_HOSTNAME}/portainer/ to view your Portainer container monitoring page. You\u2019ll then be prompted to specify a new password for the \nadmin\n account. After specifying your password, you\u2019ll then be able to connect to the Portainer UI.", 
+            "title": "Portainer"
+        }, 
+        {
+            "location": "/third_party-gogs/", 
+            "text": "With Gogs' ability to authenticate over SMTP it is trivial to integrate it with mailcow. Few changes are needed:\n\n\n1. Open \ndocker-compose.yml\n and add Gogs:\n\n\n    \ngogs\n-\nmailcow\n:\n\n      \nimage\n:\n \ngogs\n/\ngogs\n\n      \nvolumes\n:\n\n        \n-\n \n.\n/\ndata\n/\ngogs\n:\n/\ndata\n\n      \nnetworks\n:\n\n        \nmailcow\n-\nnetwork\n:\n\n          \nipv4_address:\n \n172.22.1.123\n\n          \naliases\n:\n\n            \n-\n \ngogs\n\n      \nports\n:\n\n        \n-\n \n${GOGS_SSH_PORT:-50022}:22\n\n        \n-\n \n${GOGS_WWW_PORT:-50080}:3000\n\n      \ndns\n:\n\n        \n-\n \n172.22.1.254\n\n\n\n\n\n2. Open \ndata/conf/nginx/site.conf\n and add in each \nserver{}\n block\n\nlocation\n \n/\ngogs\n/\n \n{\n\n    \nproxy_pass\n \nhttp\n:\n//\n172.22.1.123\n:\n3000\n/\n;\n\n\n}\n\n\n\n\n3. Open \nmailcow.conf\n and define ports you want Gogs to open, as well as future database password. Example:\n\n\nGOGS_WWW_PORT=3000\nGOGS_SSH_PORT=4000\nDBGOGS=CorrectHorseBatteryStaple\n\n\n\n\n4. Create database and user for Gogs to use.\n\n\n. ./mailcow.conf\ndocker-compose exec mysql-mailcow mysql -uroot -p$DBROOT\nmysql\n CREATE USER gogs IDENTIFIED BY \nCorrectHorseBatteryStaple\n;\nmysql\n CREATE DATABASE gogs;\nmysql\n GRANT ALL PRIVILEGES ON gogs.* to gogs;\n\n\n\n\n5. Run \ndocker-compose up -d\n to bring up Gogs container. Verify with \ncurl http://172.22.1.123:3000/\n that it is running.\n\n\n6. Proceed to installer from browser, for the time being using direct url \nhttp://${MAILCOW_HOSTNAME}:${GOGS_WWW_PORT}/\n, for example \nhttp://example.org:3000/\n. For database details set \n172.22.1.2\n as database host, user \ngogs\n, database name \ngogs\n and password as set above\n\n\n7. Once install is complete, login as admin and in settings - authorization enable SMTP. SMTP Host should be \n172.22.1.8\n with port \n587\n. You'll probably want to set \nSkip TLS Verify\n.\n\n\n8. Edit \ndata/gogs/gogs/conf/app.ini\n and set following values. You can consult \nGogs cheat sheet\n for their meaning and other possible values.\n\n\n[server]\n\n\nSSH_LISTEN_PORT\n \n=\n \n22\n\n\nSSH_DOMAIN\n \n=\n \n[domain where ssh is available - used for ssh clone url]\n\n\nSSH_PORT\n \n=\n \n[port where ssh is open on host - used for ssh clone url]\n\n\nROOT_URL\n \n=\n \nhttps://[url]/gogs/\n\n\n\n\n\n9. Restart Gogs with \ndocker-compose restart gogs-mailcow\n. Your users should be able to login with mailcow managed accounts.", 
+            "title": "Gogs"
+        }
+    ]
+}
